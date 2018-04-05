@@ -1,0 +1,39 @@
+---
+title: "Getting started with Data Science"
+author: "Kiran Ganji"
+date: 2018-04-05
+categories: ["Getting Started"]
+---
+
+## Knowing SQL, R/Python, Excel & Powerpoint will get the data science engine started
+
+Data scientist is the sexiest job of 21st century. Below given are some tools that a newbie in data science should get familiar with:
+
+- Excel - Can't stress enough, but this is a must and should!
+- SQL, R, Python - R (or) Python should suffice. It never hurts to have both in pocket.
+- Power point, Tableau, Power BI
+- Sublime text editor, Dropbox paper
+
+
+## Databases & Websites are crucial sources of data
+
+Almost all the companies, small and big, keep their data in databases. Languages SQL, Teradata, T-SQL will help pull data from databases. Open source datasets persist in websites and can be pulled either by using APIs (if the website provides) or scrapers. RCurl, XML2, Rvest packages in R are useful for scraping websites. Similar functionality can be obtained using BeautifulSoup library in Python.
+
+
+## Excel, R and/or Python are important for major tasks in data science projects
+
+Excel is ideally suitable for analyzing small datasets. Excel comes with limitations. An excel sheet can't hold more than 1,048,576 rows and 16,384 columns. More often than not the data is prone to cross million rows.
+
+If the data contains more than a million rows, we turn to data analysis languages like R or python for carrying out the transformations, analyses and modeling exercises. The limitations of these languages are the machine's computation limitations.
+
+## Excel, Power Point, Tableau, Power BI can help communicate your analysis in form of a story
+
+There are multiple ways one can present their stories. It can be as simple as an excel report to as complex as a dashboard. Below are few tools that will help you in presenting your analysis
+
+- Excel can be used to present simple forecasting, optimization & what-if analyses.
+- MS PowerPoint can be used for presenting insights, detailed analyses and recommendations
+- Tableau, Power BI, Qlikview & Shiny can help push data stories to wider audiences and focus on getting real time updates and make collaborative decisions.
+
+## Note making tools like Sublime text editor, MS outlook facilitate structured thinking
+
+The analyses get complex and its easy to loose track of big picture. Noting important points and structure regularly will help you stay in tracj and review your priorities. Some tools that help are Sublime text editor, MS outlook, mind map, Dropbox paper, MS word, Google docs.

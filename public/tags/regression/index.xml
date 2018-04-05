@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Regression on Kiran Ganji</title>
+    <link>/tags/regression/</link>
+    <description>Recent content in Regression on Kiran Ganji</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Thu, 05 Apr 2018 11:35:14 -0500</lastBuildDate>
+    
+	<atom:link href="/tags/regression/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Markdown Start</title>
+      <link>/blog/markdown-start/</link>
+      <pubDate>Thu, 05 Apr 2018 11:35:14 -0500</pubDate>
+      
+      <guid>/blog/markdown-start/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,52 @@
+baseurl = "https://kiranganji.com/"
+theme = "cocoa-eh-hugo-theme"
+builddrafts = true
+canonifyurls = true
+contentdir = "content"
+languageCode = "en-US"
+layoutdir = "layouts"
+publishdir = "public"
+author = "Alexis Tacnet"
+title = "Kiran Ganji"
+disqusshortname = ""
+pluralizelisttitles = false
+
+[permalinks]
+blog = "blog/:slug/"
+
+[params]
+dateform = "Jan 2, 2006"
+dateformfull = "Mon Jan 2 2006 15:04:05 MST"
+description = "Example blog"
+copyright = "Copyright © 2018 Kiran Ganji"
+# copyrightUrl = "https://creativecommons.org/licenses/by-sa/4.0/"
+logofile = "img/logo2.png"
+faviconfile = "img/logo2.png"
+highlightjs = true
+progressively = true
+share = false
+latestpostcount = 25
+github = "kiranganji"
+# email = "ganji.kiran99@gmail.com"
+linkedin = "ganjikiran"
+twitter = "GanjiKiran9"
+# facebook = "facebook_id"
+# social_banner = "img/logo2.png"
+usesmallsummarycard = true
+posts_navigation = true
+# issoHost = "comments.domain.tld:1234"
+# githubRepo = "githubUsername/repositoryName/tree/master"
+small_banner_logo = false
+
+[params.colors]
+identifier = "#527fc1f"
+identifier_dark = "#1a3152"
+trivial = "#6a7a8b"
+foreground = "#181d2a"
+background = "#f9f9f9"
+background_dark = "#282a36"
+code = "#87a5d2"
+type = "#97d28b"
+special = "#ffcb8d"
+value = "#96c2d7"
+statement = "#ff8e91"

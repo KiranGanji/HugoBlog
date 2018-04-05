@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kiran Ganji</title>
+    <link>/</link>
+    <description>Recent content on Kiran Ganji</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Thu, 05 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Getting started with Data Science</title>
+      <link>/blog/getting-started-with-data-science/</link>
+      <pubDate>Thu, 05 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/getting-started-with-data-science/</guid>
+      <description>Knowing SQL, R/Python, Excel &amp;amp; Powerpoint will get the data science engine startedData scientist is the sexiest job of 21st century. Below given are some tools that a newbie in data science should get familiar with:
+Excel - Can’t stress enough, but this is a must and should!SQL, R, Python - R (or) Python should suffice. It never hurts to have both in pocket.Power point, Tableau, Power BISublime text editor, Dropbox paperDatabases &amp;amp; Websites are crucial sources of dataAlmost all the companies, small and big, keep their data in databases.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Wed, 04 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>Data science is an unique field. You have to be creative, structured and thorough and that is why I love this field. I am Kiran Ganji and currently working as an Analyst at Gramener. I love solving complex problems and I am an aspiring consultant.
+I like statistical programming language R, Technology, International politics and Finance. I graduated from NIT Calicut with majors in Biotechnology. Since my graduation I worked with LatentView Analytics and Gramener</description>
+    </item>
+    
+    <item>
+      <title>Resume</title>
+      <link>/resume/</link>
+      <pubDate>Wed, 04 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/resume/</guid>
+      <description>Professional Summary Data Scientist with 2.5 years of experience in Predictive Analytics consulting. Conceptualized and delivered actionable models across Finance, Manufacturing and Retail industries. Currently, at Gramener, responsible for end-to-end delivery of advanced analytics projects. Have cross-industry experience on working with clients across geographies and considerable expertise in Statistics &amp;amp; Machine Learning.
+Experience Analyst, Gramener Dec 2016 - Present
+Worked on multiple advanced analytics projects for large clients in different areas - Stock trading, Commodity price forecasting and recommendation engines.</description>
+    </item>
+    
+    <item>
+      <title>Home</title>
+      <link>/home/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/home/</guid>
+      <description>Hello there! Welcome to my blog. I am Kiran Ganji and I am working as an Analyst at Gramener. I started this blog in April 2018 and regularly update it. I classify all my articles into 5 categories. Getting started, Analytics use cases, Case studies, Analysis and Learning. Please feel free to browse, drop in comments or send in the feedback. Happy to connect anytime :)</description>
+    </item>
+    
+    <item>
+      <title>License</title>
+      <link>/license/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/license/</guid>
+      <description>You can use this page to put a license on the contents of your blog, like so:
+ The MIT License (MIT)
+Copyright &amp;copy; 2015 Nishanth Shanmughamnishanth.gerrard@gmail.com
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &amp;ldquo;Software&amp;rdquo;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</description>
+    </item>
+    
+  </channel>
+</rss>
