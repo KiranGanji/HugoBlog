@@ -6,10 +6,21 @@
     <description>Recent content on Kiran Ganji</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Thu, 05 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Excel must knows</title>
+      <link>/blog/excel-must-knows/</link>
+      <pubDate>Fri, 06 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/excel-must-knows/</guid>
+      <description>Microsoft Excel is a godsend for anyone who want to analyze and visualize data. In this article let’s look at some of the must-knows of excel to get started.
+Anyone who wishes to master excel should know the following aspects:
+Navigation using shortcuts - Boosts productivity by atleast 20%Pivot tables - Aggregates and unlocks the relationships between variablesFormulas - Help derive new metrics, define KPIs, transform and quantify variablesVisualization - Make sense of the data through a visual aidSolver - Advanced optimization with easeAlt, Ctrl and Shift are your friends when it comes to navigating around in excelKeyboard shortcuts help you move around in excel without using mouse.</description>
+    </item>
     
     <item>
       <title>Getting started with Data Science</title>

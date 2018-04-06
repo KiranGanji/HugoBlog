@@ -1,0 +1,88 @@
+---
+title: "Excel must knows"
+author: "Kiran Ganji"
+date: 2018-04-06
+categories: ["Getting Started"]
+---
+
+Microsoft Excel is a godsend for anyone who want to analyze and visualize data. In this article let's look at some of the must-knows of excel to get started.
+
+Anyone who wishes to master excel should know the following aspects:
+
+- Navigation using shortcuts - Boosts productivity by atleast 20%
+- Pivot tables - Aggregates and unlocks the relationships between variables
+- Formulas - Help derive new metrics, define KPIs, transform and quantify variables 
+- Visualization - Make sense of the data through a visual aid
+- Solver - Advanced optimization with ease
+
+## Alt, Ctrl and Shift are your friends when it comes to navigating around in excel
+
+Keyboard shortcuts help you move around in excel without using mouse. Every menu function in excel has a shortcut and one can view the letter that represents it by pressing Alt key. Once you press Alt, individual letters pop up in excel for each menu and following the letters you can generate the shortcuts you wish. For example, let's say you want to increase column width to fit the title. You can do this by selecting the column -> going to the home tab -> Format -> "Auto fit the column width". The similar function can also be achieved by pressing Alt + H + O + I keys in the sequence.
+
+Below given are some of the must know shortcuts:
+
+- *Ctrl + Arrow keys* - Move to the last row/column within the respective table
+- *Ctrl + Shift + Arrow keys* - Select the entire row/column within the respective table
+- *Ctrl + Shift + 8* - Select the entire table
+- *Alt + I + C* - Create a new column to the left
+- *Alt + I + R* - Create a new row above the current cell
+- *Ctrl + -* - Delete the cells, columns, rows
+- *Ctrl + 0* - Hide the columns
+- *Alt + H + E + A* - Clear the contents of the cells selected
+- *Alt + N + V* - Insert a pivot table
+- *Alt + =* - Generate the sum of the selected numbers
+- *Alt + H + L + S* - Apply conditional formatting with Green indicating the highest and Red indicating the lowest
+- *Alt + A + M* - Remove duplicates
+- *Alt + D + G + G* - Group rows/columns
+- *Ctrl + Shift + L* - Generate filters for the table
+- *Alt + Down arrow key* - To open up the filter menu (Do this after the Ctrl + Shift + L)
+- *Alt + W + F + F* - Freeze rows above and columns to the left of the cell
+- *Alt + W + F + R* - Freeze top row of the table
+- *Alt + W + F + C* - Freeze first column of the table
+- *Ctrl + Page Down* - Move to next sheet
+- *Ctrl + Page Up* - Move to previous sheet
+
+## Pivot tables help in aggregation and comparison of various variables
+
+Pivot tables provide a GUI for aggregation and help explore relationship between variables. Pivot tables are simple and straight forward to use in excel. A pivot table control panel has 4 tabs. Report filter which lets you add columns whose values you want to specifically filter, Rows for what variable should populate as rows, Columns for what to variables should populate in columns and finally Values tab for the aggregation type preferred. Below provided are few things about pivot table one needs to know:
+
+- Aggregation methods available are Sum, Count, Average, Max, Min, Std deviation
+- One can also calculate the percentages based on the row grand total, column grand total or parent totals
+- One can create a calculated fields based on formula including multiple columns
+- From excel 2013 onwards, you can also get unique value counts
+- Charts constructing using pivot table are interactive as well
+
+## Excel formulas help derive new metrics, define KPIs, transform and quantify variables
+
+Formulas are the reason why excel can accommodate complex reports. One can link multiple cells based on a formulas and construct a what-if scenarios. This is just the tip of the iceberg. One can join multiple tables, write multiple if clauses, aggregate the counts only if they meet certain criteria, calculate sum, averages, standard deviations, calculate interests and so on. The possibilities are unlimited. For now, the ones which I use on a regular basis are provided below:
+
+- *SUM* - Calculates the sum of the numbers
+- *AVERAGE* - Calculates the average of the numbers
+- *VLOOKUP* - Joining two tables
+- *IF* - If else statement
+- *COUNTIF* - Counts the numbers/rows that meet a specific criteria
+- *LEFT* - Cuts the string from left to the amount of characters specified
+- *RIGHT* - Cuts the string from right to the amount of the characters specified
+- *MID* - Cuts the strings from middle
+- *DATE* - Takes year, month and day separately and converts into a text format
+- *MATCH* - Returns the row number/index of a string in a table
+- *AND*/OR - Operators for checking multiple conditions
+- *LEN* - Returns number of characters of a string
+- *STDDEV.S* - Returns sample standard deviation of the numbers
+- *STDDEV.P* - Returns population standard deviation of the numbers
+- *TRIM* - Trims the leading/lagging spaces from the strings
+
+Some other formulas which I don't use frequently but good to be aware of are *INDIRECT*, *IFERROR*, *RAND*, *RANDBETWEEN*, *UPPER*, *LOWER*, *SUBSTITUTE*, *YEAR*, *MONTH*, *DAY*, *WEEKDAY*, *WEEKNUM*, *SUMIF*, *LOG*, *LN*, *ISERROR*, *ISNA*, *ISEVEN*, *ISODD*.
+
+## Conditional formatting and charts serve as the visual aid for making sense of the data
+
+Conditional formatting is the flag bearer of excel. Using conditional formatting, one can construct heat maps across numerical data to detect patterns and anomalies. Excel provides many visually appealing formatting options to choose from which includes custom color scales, bars, icons and shapes.
+
+If conditional formatting help make sense of tables, charts help make sense of the data using graphs. There are trove of charts with heavy customizable options to choose from. The charts in excel exclude Bar graphs, Stacked column, Pie, Area, scatter, bubble, stocks charts.  
+
+
+## Solver helps construct simple mockups for complex optimization engines
+
+Solver comes as part of the Analysis toolpak package. This allows one to create objective function, create constrains and an option to minimize or maximize the objective using linear, non-linear and Genetic algorithms.
+
+This comes in handy for most of the analyses and to construct simple mockup optimization engines before productionization.

@@ -36,4 +36,4 @@ There are multiple ways one can present their stories. It can be as simple as an
 
 ## Note making tools like Sublime text editor, MS outlook facilitate structured thinking
 
-The analyses get complex and its easy to loose track of big picture. Noting important points and structure regularly will help you stay in tracj and review your priorities. Some tools that help are Sublime text editor, MS outlook, mind map, Dropbox paper, MS word, Google docs.
+The analyses get complex and its easy to loose track of big picture. Noting important points and structure regularly will help you stay in track and review your priorities. Some tools that help are Sublime text editor, MS outlook, mind map, Dropbox paper, MS word, Google docs.
