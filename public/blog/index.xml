@@ -6,10 +6,21 @@
     <description>Recent content in Blog on Kiran Ganji</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Fri, 06 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Cryptocurrency analysis - What to trade?</title>
+      <link>/blog/cryptocurrency-analysis---what-to-trade/</link>
+      <pubDate>Sun, 08 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/cryptocurrency-analysis---what-to-trade/</guid>
+      <description>I recently developed a rudimentary method to identify the potential cryptocurrencies to BUY and trade. I did this exercise for Gramener’s blog. Reposting the same below. The actual article that I wrote can be found here
+I followed the below steps:
+Scraped the entire trading history of each of the cryptocurrencies available at CoinMarketCapFiltered cryptocurrencies based on Market capital, moving averages and PricesRan a greedy search to identify the combination of moving averages that yielded maximum profits on cross over points trading strategy.</description>
+    </item>
     
     <item>
       <title>Excel must knows</title>

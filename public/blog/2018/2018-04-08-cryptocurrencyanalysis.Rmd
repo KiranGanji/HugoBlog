@@ -1,0 +1,53 @@
+---
+title: "Cryptocurrency analysis - What to trade?"
+author: "Kiran Ganji"
+date: 2018-04-08
+categories: ["Analysis"]
+---
+
+I recently developed a rudimentary method to identify the potential cryptocurrencies to BUY and trade. I did this exercise for Gramener's blog. Reposting the same below. The actual article that I wrote can be found [here](http://blog.gramener.com/3030/a-trading-strategy-for-cryptocurrencies)
+
+I followed the below steps:
+
+- Scraped the entire trading history of each of the cryptocurrencies available at [CoinMarketCap](https://coinmarketcap.com/)
+- Filtered cryptocurrencies based on Market capital, moving averages and Prices
+- Ran a greedy search to identify the combination of moving averages that yielded maximum profits on cross over points trading strategy.
+- Calculated a *ROI*, *Profit/Trade* and *trade frequency* to shortlist the final set of cryptos to trade
+
+## CoinMarketCap holds the entire trading history of all the cryptocurrencies and is easy to scrape
+
+I scraped the required data in two levels. In level 1, I scraped a table from summary page which lists all the current cryptocurrencies. This table has latest market capital holdings, price and volume traded. This table also has the URL for each of the individual cryptocurrencies. I collected these.
+
+Using the URLs collected from level 1, I individually scraped trading history from each page. There are two cryptocurrencies with duplicate names - Enigma and HempCoin. I wrote a clause within the code to change the names when the scraper encounters either of the names.
+
+## Using market capital, moving averages and prices, filtered the cryptocurrencies
+
+Once I had all the historical data for each cryptocurrencies, I filtered the cryptocurrencies using the below logic:
+
+- Removed the cryptocurrencies which had zero market capital
+- Filtered cryptocurrencies that traded for less than 90 days
+- Calculated 10, 20, 30, 40 & 50 day moving averages and filtered out currencies whose current price is less than the moving averages. These are the potential cryptocurrencies to BUY
+- Finally, filtered the cryptocurrencies which traded greater than $0.25. This is for higher returns.
+
+## Using greedy search, identified the combination of moving averages that yielded maximum profits
+
+In order to understand which moving averages to pick, I developed a back testing process which:
+
+- Picks two unequal moving averages
+- At the point where the shorter day moving average takes over longer day moving average, it executes a BUY trade and vice versa.
+- Repeats the above step for the entire history
+- Collects the total profit & total trades made.
+- Write them to the data frame.
+
+I repeated the above process for all the cryptocurrencies and for all the combinations from 2 until 50 moving averages. I sorted each of them through the profits made. I finally selected the moving averages with the highest profits.
+
+
+## Using metrics like *Profit/Unit*, *ROI*, *Profit/Trade* and *trade frequency*, I shortlisted final cryptos to trade
+
+Based on the total profits, number of trades and price, I derived *ROI* as *Profit/Price*, Profit per trade as *Profit/Trades(#)* and *Trade Frequency* as *Trades(#)/(Total trading days)*. Based on these metrics, I picked cryptocurrencies that had highest values within in each category.
+
+Note 1: The codes written for this analysis can be found [here](https://github.com/KiranGanji/cryptocurrencybacktest)
+
+Note 2: This entire analysis has been converted into a beautiful infographic by my colleague, [Ankita Dash](https://in.linkedin.com/in/ankita-dash-8547366b). Posting the infographic down below.
+
+![Cryptocurreny analysis infographic](/img/cryptocurrencies.png)
