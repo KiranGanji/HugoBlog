@@ -6,10 +6,21 @@
     <description>Recent content in Blog on Kiran Ganji</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 08 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linear regression - Must knows</title>
+      <link>/blog/linear-regression---must-knows/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/linear-regression---must-knows/</guid>
+      <description>Linear regression is one of the easiest and first taught models. But there is more to the algorithm than it appears. Given its simplicity, it is often abused. In this article, let’s get some facts straight about the algorithm.
+Must-knows about linear regression:
+Linear regression derives a trend line that best fits the dataThere should be linear relationship between response variable &amp;amp; predictors and predictors shouldn’t be correlatedResiduals (Actual - Fitted) should be normally distributed, have constant variance and shouldn’t be autocorrelated.</description>
+    </item>
     
     <item>
       <title>Cryptocurrency analysis - What to trade?</title>

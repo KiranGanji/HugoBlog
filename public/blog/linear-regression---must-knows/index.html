@@ -15,9 +15,9 @@
 <meta property="og:site_name" content="Kiran Ganji" />
 <meta property="og:locale" content="nn_NO" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/blog/cryptocurrency-analysis---what-to-trade/" />
-<meta property="og:title" content="Cryptocurrency analysis - What to trade?" />
-<meta property="twitter:title" content="Cryptocurrency analysis - What to trade?">
+<meta property="og:url" content="/blog/linear-regression---must-knows/" />
+<meta property="og:title" content="Linear regression - Must knows" />
+<meta property="twitter:title" content="Linear regression - Must knows">
 
     <meta property="twitter:card" content="summary">
 
@@ -27,10 +27,10 @@
 <title>
 
 
-     Kiran Ganji - Cryptocurrency analysis - What to trade? 
+     Kiran Ganji - Linear regression - Must knows 
 
 </title>
-<link rel="canonical" href="/blog/cryptocurrency-analysis---what-to-trade/">
+<link rel="canonical" href="/blog/linear-regression---must-knows/">
 
 
 <style media="screen">
@@ -1096,13 +1096,13 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                 <div class="title-container">
                     <div class="page-heading">
 
-    Cryptocurrency analysis - What to trade?
+    Linear regression - Must knows
 
 </div>
 
                 </div>
                 <div class="meta">
-                    <div class="date" title="Sun Apr 8 2018 00:00:00 UTC">Apr 8, 2018</div>
+                    <div class="date" title="Fri Apr 20 2018 00:00:00 UTC">Apr 20, 2018</div>
                     
                         
                         <div class="author middot" title="Kiran Ganji">Kiran Ganji</div>
@@ -1125,50 +1125,27 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <div class="markdown">
                 
     
-    <p>I recently developed a rudimentary method to identify the potential cryptocurrencies to BUY and trade. I did this exercise for Gramener’s blog. Reposting the same below. The actual article that I wrote can be found <a href="http://blog.gramener.com/3030/a-trading-strategy-for-cryptocurrencies">here</a></p>
-<p>I followed the below steps:</p>
+    <p>Linear regression is one of the easiest and first taught models. But there is more to the algorithm than it appears. Given its simplicity, it is often abused. In this article, let’s get some facts straight about the algorithm.</p>
+<p>Must-knows about linear regression:</p>
 <ul>
-<li>Scraped the entire trading history of each of the cryptocurrencies available at <a href="https://coinmarketcap.com/">CoinMarketCap</a></li>
-<li>Filtered cryptocurrencies based on Market capital, moving averages and Prices</li>
-<li>Ran a greedy search to identify the combination of moving averages that yielded maximum profits on cross over points trading strategy.</li>
-<li>Calculated a <em>ROI</em>, <em>Profit/Trade</em> and <em>trade frequency</em> to shortlist the final set of cryptos to trade</li>
+<li>Linear regression derives a trend line that best fits the data</li>
+<li>There should be linear relationship between response variable &amp; predictors and predictors shouldn’t be correlated</li>
+<li>Residuals (Actual - Fitted) should be normally distributed, have constant variance and shouldn’t be autocorrelated.</li>
 </ul>
-<div id="coinmarketcap-holds-the-entire-trading-history-of-all-the-cryptocurrencies-and-is-easy-to-scrape" class="section level2">
-<h2>CoinMarketCap holds the entire trading history of all the cryptocurrencies and is easy to scrape</h2>
-<p>I scraped the required data in two levels. In level 1, I scraped a table from summary page which lists all the current cryptocurrencies. This table has latest market capital holdings, price and volume traded. This table also has the URL for each of the individual cryptocurrencies. I collected these.</p>
-<p>Using the URLs collected from level 1, I individually scraped trading history from each page. There are two cryptocurrencies with duplicate names - Enigma and HempCoin. I wrote a clause within the code to change the names when the scraper encounters either of the names.</p>
+<div id="linear-regression-derives-a-trend-line-that-best-fits-the-data" class="section level2">
+<h2>Linear regression derives a trend line that best fits the data</h2>
+<p>Linear regression that we generally use is called Ordinary Least Squares regression (or) OLS regression. This method calculates best-fitting line for the observed data by minimizing the vertical deviations from each data point to the line. We measure the deviation as the square of the distance of the line to the point. We square it so that, when we add individual deviations, the positive and negative deviations do not cancel out. Hence the objective function of this algorithm will be sum of squared deviations.</p>
 </div>
-<div id="using-market-capital-moving-averages-and-prices-filtered-the-cryptocurrencies" class="section level2">
-<h2>Using market capital, moving averages and prices, filtered the cryptocurrencies</h2>
-<p>Once I had all the historical data for each cryptocurrencies, I filtered the cryptocurrencies using the below logic:</p>
-<ul>
-<li>Removed the cryptocurrencies which had zero market capital</li>
-<li>Filtered cryptocurrencies that traded for less than 90 days</li>
-<li>Calculated 10, 20, 30, 40 &amp; 50 day moving averages and filtered out currencies whose current price is less than the moving averages. These are the potential cryptocurrencies to BUY</li>
-<li>Finally, filtered the cryptocurrencies which traded greater than $0.25. This is for higher returns.</li>
-</ul>
+<div id="there-should-be-linear-relationship-between-response-variable-predictors-and-predictors-shouldnt-be-correlated" class="section level2">
+<h2>There should be linear relationship between response variable &amp; predictors and predictors shouldn’t be correlated</h2>
+<p>Linear regression draws a straight line and cannot draw a curve. Therefore it’s a pre-requisite that the response and predictor variables are linearly related. Other pre-requisite is that the predictors shouldn’t be correlated to each other. In the case of correlated predictors, it becomes tough task to figure out which predictor is actually contributing to the response variable.</p>
 </div>
-<div id="using-greedy-search-identified-the-combination-of-moving-averages-that-yielded-maximum-profits" class="section level2">
-<h2>Using greedy search, identified the combination of moving averages that yielded maximum profits</h2>
-<p>In order to understand which moving averages to pick, I developed a back testing process which:</p>
-<ul>
-<li>Picks two unequal moving averages</li>
-<li>At the point where the shorter day moving average takes over longer day moving average, it executes a BUY trade and vice versa.</li>
-<li>Repeats the above step for the entire history</li>
-<li>Collects the total profit &amp; total trades made.</li>
-<li>Write them to the data frame.</li>
-</ul>
-<p>I repeated the above process for all the cryptocurrencies and for all the combinations from 2 until 50 moving averages. I sorted each of them through the profits made. I finally selected the moving averages with the highest profits.</p>
-</div>
-<div id="using-metrics-like-profitunit-roi-profittrade-and-trade-frequency-i-shortlisted-final-cryptos-to-trade" class="section level2">
-<h2>Using metrics like <em>Profit/Unit</em>, <em>ROI</em>, <em>Profit/Trade</em> and <em>trade frequency</em>, I shortlisted final cryptos to trade</h2>
-<p>Based on the total profits, number of trades and price, I derived <em>ROI</em> as <em>Profit/Price</em>, Profit per trade as <em>Profit/Trades(#)</em> and <em>Trade Frequency</em> as <em>Trades(#)/(Total trading days)</em>. Based on these metrics, I picked cryptocurrencies that had highest values within in each category.</p>
-<p>Note 1: The codes written for this analysis can be found <a href="https://github.com/KiranGanji/cryptocurrencybacktest">here</a></p>
-<p>Note 2: This entire analysis has been converted into a beautiful infographic by my colleague, <a href="https://in.linkedin.com/in/ankita-dash-8547366b">Ankita Dash</a>. Posting the infographic down below.</p>
-<div class="figure">
-<figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="/img/cryptocurrencies.png" src="/img/low/cryptocurrencies.png" alt="Cryptocurreny analysis infographic" /></figure>
-<p class="caption">Cryptocurreny analysis infographic</p>
-</div>
+<div id="residuals-should-be-normally-distributed-have-constant-variance-and-shouldnt-be-autocorrelated." class="section level2">
+<h2>Residuals should be normally distributed, have constant variance and shouldn’t be autocorrelated.</h2>
+<p>OLS regression is very sensitive to outliers. Presence of outliers can distort true relationship between response variable and predictors. Residuals provide us a way to understand if the regression coefficients are trust worthy. Residuals, if normally distributed, indicate that they data is void of outliers. If residuals are not distributed normally, there are chances that the outliers exist and that the model is not trust worthy.</p>
+<p>There is another way of testing the same outliers effect. Check the variance of the residuals. If they are scattered without any patterns, that indicates the constant variance. Else, there are outliers which get too much weight and disproportionately influences the model’s performance.</p>
+<p>In the case of time series, the residuals are usually correlated with their lagged values. This is called autocorrelation. Presence of autocorrelation, effects the p-values of prediction intervals rendering the models untrustworthy. It is always recommended to check this assumption as well.</p>
+<p>In this article, we learned the assumptions behind the regression and next article lets implement these practically with an example.</p>
 </div>
 
 
@@ -1180,15 +1157,10 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     
                     <div>
                         <img class="icon" src="/img/back.svg" alt="back" />
-                        <a href="/blog/excel-must-knows/">Excel must knows</a>
+                        <a href="/blog/cryptocurrency-analysis---what-to-trade/">Cryptocurrency analysis - What to trade?</a>
                     </div>
                     
                     <div style="width: 100%;"></div>
-                    
-                    <div>
-                        <a href="/blog/linear-regression---must-knows/">Linear regression - Must knows</a>
-                        <img class="icon" src="/img/next.svg" alt="next" />
-                    </div>
                     
                 </div>
             

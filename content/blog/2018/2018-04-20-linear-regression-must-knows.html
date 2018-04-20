@@ -1,0 +1,31 @@
+---
+title: "Linear regression - Must knows"
+author: "Kiran Ganji"
+date: 2018-04-20
+categories: ["Learning"]
+---
+
+
+
+<p>Linear regression is one of the easiest and first taught models. But there is more to the algorithm than it appears. Given its simplicity, it is often abused. In this article, let’s get some facts straight about the algorithm.</p>
+<p>Must-knows about linear regression:</p>
+<ul>
+<li>Linear regression derives a trend line that best fits the data</li>
+<li>There should be linear relationship between response variable &amp; predictors and predictors shouldn’t be correlated</li>
+<li>Residuals (Actual - Fitted) should be normally distributed, have constant variance and shouldn’t be autocorrelated.</li>
+</ul>
+<div id="linear-regression-derives-a-trend-line-that-best-fits-the-data" class="section level2">
+<h2>Linear regression derives a trend line that best fits the data</h2>
+<p>Linear regression that we generally use is called Ordinary Least Squares regression (or) OLS regression. This method calculates best-fitting line for the observed data by minimizing the vertical deviations from each data point to the line. We measure the deviation as the square of the distance of the line to the point. We square it so that, when we add individual deviations, the positive and negative deviations do not cancel out. Hence the objective function of this algorithm will be sum of squared deviations.</p>
+</div>
+<div id="there-should-be-linear-relationship-between-response-variable-predictors-and-predictors-shouldnt-be-correlated" class="section level2">
+<h2>There should be linear relationship between response variable &amp; predictors and predictors shouldn’t be correlated</h2>
+<p>Linear regression draws a straight line and cannot draw a curve. Therefore it’s a pre-requisite that the response and predictor variables are linearly related. Other pre-requisite is that the predictors shouldn’t be correlated to each other. In the case of correlated predictors, it becomes tough task to figure out which predictor is actually contributing to the response variable.</p>
+</div>
+<div id="residuals-should-be-normally-distributed-have-constant-variance-and-shouldnt-be-autocorrelated." class="section level2">
+<h2>Residuals should be normally distributed, have constant variance and shouldn’t be autocorrelated.</h2>
+<p>OLS regression is very sensitive to outliers. Presence of outliers can distort true relationship between response variable and predictors. Residuals provide us a way to understand if the regression coefficients are trust worthy. Residuals, if normally distributed, indicate that they data is void of outliers. If residuals are not distributed normally, there are chances that the outliers exist and that the model is not trust worthy.</p>
+<p>There is another way of testing the same outliers effect. Check the variance of the residuals. If they are scattered without any patterns, that indicates the constant variance. Else, there are outliers which get too much weight and disproportionately influences the model’s performance.</p>
+<p>In the case of time series, the residuals are usually correlated with their lagged values. This is called autocorrelation. Presence of autocorrelation, effects the p-values of prediction intervals rendering the models untrustworthy. It is always recommended to check this assumption as well.</p>
+<p>In this article, we learned the assumptions behind the regression and next article lets implement these practically with an example.</p>
+</div>
