@@ -15,9 +15,9 @@
 <meta property="og:site_name" content="Kiran Ganji" />
 <meta property="og:locale" content="nn_NO" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/blog/linear-regression---must-knows/" />
-<meta property="og:title" content="Linear regression - Must knows" />
-<meta property="twitter:title" content="Linear regression - Must knows">
+<meta property="og:url" content="/blog/karnataka-election-projections/" />
+<meta property="og:title" content="Karnataka Election Projections" />
+<meta property="twitter:title" content="Karnataka Election Projections">
 
     <meta property="twitter:card" content="summary">
 
@@ -27,10 +27,10 @@
 <title>
 
 
-     Kiran Ganji - Linear regression - Must knows 
+     Kiran Ganji - Karnataka Election Projections 
 
 </title>
-<link rel="canonical" href="/blog/linear-regression---must-knows/">
+<link rel="canonical" href="/blog/karnataka-election-projections/">
 
 
 <style media="screen">
@@ -1096,19 +1096,19 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                 <div class="title-container">
                     <div class="page-heading">
 
-    Linear regression - Must knows
+    Karnataka Election Projections
 
 </div>
 
                 </div>
                 <div class="meta">
-                    <div class="date" title="Fri Apr 20 2018 00:00:00 UTC">Apr 20, 2018</div>
+                    <div class="date" title="Sat May 12 2018 00:00:00 UTC">May 12, 2018</div>
                     
                         
                         <div class="author middot" title="Kiran Ganji">Kiran Ganji</div>
                         
                     
-                    <div class="reading-time middot">3 minute read</div>
+                    <div class="reading-time middot">4 minute read</div>
                     <div class="tags">
                         <ul>
                           
@@ -1125,27 +1125,61 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
             <div class="markdown">
                 
     
-    <p>Linear regression is one of the easiest and first taught models. But there is more to the algorithm than it appears. Given its simplicity, it is often abused. In this article, let’s get some facts straight about the algorithm.</p>
-<p>Must-knows about linear regression:</p>
+    <p>The Karnataka elections are just around the corner and election analysis is always one of the most interesting analysis to do in the field of analytics. The past week, I tried to answer one question - Can we project the number of seats that are going to be won by major contesting parties of Karnataka. And this got me started on the analysis.</p>
+<p>The major takeaways from my analysis are described below:</p>
 <ul>
-<li>Linear regression derives a trend line that best fits the data</li>
-<li>There should be linear relationship between response variable &amp; predictors and predictors shouldn’t be correlated</li>
-<li>Residuals (Actual - Fitted) should be normally distributed, have constant variance and shouldn’t be autocorrelated.</li>
+<li>Karnataka has 224 constituencies of which 169 exist from 1978 and 55 from 2008</li>
+<li>Congress won 5 out of the past 9 elections stating that it has a strong presence</li>
+<li>Of the 224 seats, 91 seats have a medium to high probability of Congress winning them.</li>
 </ul>
-<div id="linear-regression-derives-a-trend-line-that-best-fits-the-data" class="section level2">
-<h2>Linear regression derives a trend line that best fits the data</h2>
-<p>Linear regression that we generally use is called Ordinary Least Squares regression (or) OLS regression. This method calculates best-fitting line for the observed data by minimizing the vertical deviations from each data point to the line. We measure the deviation as the square of the distance of the line to the point. We square it so that, when we add individual deviations, the positive and negative deviations do not cancel out. Hence the objective function of this algorithm will be sum of squared deviations.</p>
+<div id="karnataka-has-224-constituencies-of-which-169-exist-from-1978-and-55-from-2008" class="section level2">
+<h2>Karnataka has 224 constituencies of which 169 exist from 1978 and 55 from 2008</h2>
+<p>Karnataka has 224 constituencies and had this from 1978 onwards. As the time passed, some of the constituencies’ borders were redefined and given a new names. In doing so, 169 of the 224 that existed from 1978 remained intact. The regions for which the borders were redefined resulted in 55 new constituencies. Below given is the map of the Karnataka constituencies outlining the existing and newly formed constituencies.</p>
+<div class="figure">
+<figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="/img/Karnataka_Constituencies.png" src="/img/low/Karnataka_Constituencies.png" alt="Karnataka Constituencies Map" /></figure>
+<p class="caption">Karnataka Constituencies Map</p>
 </div>
-<div id="there-should-be-linear-relationship-between-response-variable-predictors-and-predictors-shouldnt-be-correlated" class="section level2">
-<h2>There should be linear relationship between response variable &amp; predictors and predictors shouldn’t be correlated</h2>
-<p>Linear regression draws a straight line and cannot draw a curve. Therefore it’s a pre-requisite that the response and predictor variables are linearly related. Other pre-requisite is that the predictors shouldn’t be correlated to each other. In the case of correlated predictors, it becomes tough task to figure out which predictor is actually contributing to the response variable.</p>
 </div>
-<div id="residuals-should-be-normally-distributed-have-constant-variance-and-shouldnt-be-autocorrelated." class="section level2">
-<h2>Residuals should be normally distributed, have constant variance and shouldn’t be autocorrelated.</h2>
-<p>OLS regression is very sensitive to outliers. Presence of outliers can distort true relationship between response variable and predictors. Residuals provide us a way to understand if the regression coefficients are trust worthy. Residuals, if normally distributed, indicate that they data is void of outliers. If residuals are not distributed normally, there are chances that the outliers exist and that the model is not trust worthy.</p>
-<p>There is another way of testing the same outliers effect. Check the variance of the residuals. If they are scattered without any patterns, that indicates the constant variance. Else, there are outliers which get too much weight and disproportionately influences the model’s performance.</p>
-<p>In the case of time series, the residuals are usually correlated with their lagged values. This is called autocorrelation. Presence of autocorrelation, effects the p-values of prediction intervals rendering the models untrustworthy. It is always recommended to check this assumption as well.</p>
-<p>In this article, we learned the assumptions behind the regression and next article lets implement these practically with an example.</p>
+<div id="congress-won-5-out-of-the-past-9-elections-stating-that-it-has-a-strong-presence" class="section level2">
+<h2>Congress won 5 out of the past 9 elections stating that it has a strong presence</h2>
+<p>The criteria to win an election is to achieve one seat greater than 50% of the seats available. Therefore, for a party to win it needs to win atleast 113 seats. It so happens that if a party doesn’t receive the required seats, other parties can support and form a government. Looking at the past elections, we notice the following:</p>
+<div class="figure">
+<figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="/img/Karnataka_Past_Elections.png" src="/img/low/Karnataka_Past_Elections.png" alt="Karnataka Past election results" /></figure>
+<p class="caption">Karnataka Past election results</p>
+</div>
+<ul>
+<li>Congress won 5 out of 9 elections in the past. Years in which congress won include 1978, 1989, 1999, 2004 and 2013.</li>
+<li>Of all the 9 elections, in 1983, 2004 &amp; 2008 none of the parties received majority
+<ul>
+<li>In 1983 Janta Party formed government from the support with BJP</li>
+<li>In 2004, Congress was supported by JD(S) and formed the government</li>
+<li>In 2008, BJP combined with independently contesting candidates to form the government for the first time.</li>
+</ul></li>
+</ul>
+</div>
+<div id="of-the-224-seats-91-seats-have-a-medium-to-high-probability-of-congress-winning-them" class="section level2">
+<h2>Of the 224 seats, 91 seats have a medium to high probability of Congress winning them</h2>
+<p>Now that we know that Congress won most of the elections, can we project what all constituencies are likely to show affiliations towards the Congress? For the 169 constituencies that exist from 1978, I assigned weights to each of the elections which decreased exponentially. For each election and constituency, I created one hot encoded variables for 3 parties, Congress, BJP and JD(S). I multiplied the weights to each of the one-hot encoded values. I added the multiplied weights and divided by the sum of weights. Thus obtained score is the probability with which a particular party is affiliated to that particular constituency.</p>
+<div class="figure">
+<figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="/img/prbob_scores.PNG" src="/img/low/prbob_scores.PNG" alt="Weighted average probability scores sample" /></figure>
+<p class="caption">Weighted average probability scores sample</p>
+</div>
+<p>Once these scores are obtained, I divided them into 2 categories. Scores greater than with <em>greater than or equal to 75%</em> and <em>greater than 50% and less than 75%</em>. These mapped on the Karnataka constituency map is shown below</p>
+<div class="figure">
+<figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="/img/Karnataka_Seat_Projections.png" src="/img/low/Karnataka_Seat_Projections.png" alt="Karnataka constituency party affiliation scores mapped" /></figure>
+<p class="caption">Karnataka constituency party affiliation scores mapped</p>
+</div>
+<p>Converting the above into numbers:</p>
+<ul>
+<li>91 constituencies show medium to strong affiliation towards Congress (47 Strong; 44 Medium)</li>
+<li>25 constituencies show medium to strong affiliation towards BJP (19 Strong; 6 Medium)</li>
+<li>36 constituencies show medium to strong affiliation towards JD(S) (13 Strong; 23 Medium)</li>
+</ul>
+<p>Again, these constitute to only 169 constituencies and though according to method, the election seems to favor Congress, the election can go either way depending on the performance of the unscored 55 constituencies. Let’s map back after elections and see how close was I with respect to this forecast :)</p>
+</div>
+<div id="data-and-maps-sources" class="section level2">
+<h2>Data and maps sources</h2>
+<p>Data for this analysis was obtained from <a href="https://github.com/datameet/india-election-data/tree/master/assembly-elections">Datameet’s github</a>. The maps were created using <a href="https://gramener.com/">Gramener’s</a> proprietary <a href="https://gramener.com/indiamap/">Excel Maps tool</a>. I will update the code for this analysis post election :)</p>
 </div>
 
 
@@ -1157,15 +1191,10 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     
                     <div>
                         <img class="icon" src="/img/back.svg" alt="back" />
-                        <a href="/blog/cryptocurrency-analysis---what-to-trade/">Cryptocurrency analysis - What to trade?</a>
+                        <a href="/blog/linear-regression---must-knows/">Linear regression - Must knows</a>
                     </div>
                     
                     <div style="width: 100%;"></div>
-                    
-                    <div>
-                        <a href="/blog/karnataka-election-projections/">Karnataka Election Projections</a>
-                        <img class="icon" src="/img/next.svg" alt="next" />
-                    </div>
                     
                 </div>
             

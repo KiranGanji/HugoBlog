@@ -6,10 +6,20 @@
     <description>Recent content on Kiran Ganji</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Fri, 20 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 12 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Karnataka Election Projections</title>
+      <link>/blog/karnataka-election-projections/</link>
+      <pubDate>Sat, 12 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/karnataka-election-projections/</guid>
+      <description>The Karnataka elections are just around the corner and election analysis is always one of the most interesting analysis to do in the field of analytics. The past week, I tried to answer one question - Can we project the number of seats that are going to be won by major contesting parties of Karnataka. And this got me started on the analysis.
+The major takeaways from my analysis are described below:</description>
+    </item>
     
     <item>
       <title>Linear regression - Must knows</title>

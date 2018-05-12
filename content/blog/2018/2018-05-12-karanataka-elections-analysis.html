@@ -1,0 +1,65 @@
+---
+title: "Karnataka Election Projections"
+author: "Kiran Ganji"
+date: 2018-05-12
+categories: ["Analysis"]
+---
+
+
+
+<p>The Karnataka elections are just around the corner and election analysis is always one of the most interesting analysis to do in the field of analytics. The past week, I tried to answer one question - Can we project the number of seats that are going to be won by major contesting parties of Karnataka. And this got me started on the analysis.</p>
+<p>The major takeaways from my analysis are described below:</p>
+<ul>
+<li>Karnataka has 224 constituencies of which 169 exist from 1978 and 55 from 2008</li>
+<li>Congress won 5 out of the past 9 elections stating that it has a strong presence</li>
+<li>Of the 224 seats, 91 seats have a medium to high probability of Congress winning them.</li>
+</ul>
+<div id="karnataka-has-224-constituencies-of-which-169-exist-from-1978-and-55-from-2008" class="section level2">
+<h2>Karnataka has 224 constituencies of which 169 exist from 1978 and 55 from 2008</h2>
+<p>Karnataka has 224 constituencies and had this from 1978 onwards. As the time passed, some of the constituencies’ borders were redefined and given a new names. In doing so, 169 of the 224 that existed from 1978 remained intact. The regions for which the borders were redefined resulted in 55 new constituencies. Below given is the map of the Karnataka constituencies outlining the existing and newly formed constituencies.</p>
+<div class="figure">
+<img src="/img/Karnataka_Constituencies.png" alt="Karnataka Constituencies Map" />
+<p class="caption">Karnataka Constituencies Map</p>
+</div>
+</div>
+<div id="congress-won-5-out-of-the-past-9-elections-stating-that-it-has-a-strong-presence" class="section level2">
+<h2>Congress won 5 out of the past 9 elections stating that it has a strong presence</h2>
+<p>The criteria to win an election is to achieve one seat greater than 50% of the seats available. Therefore, for a party to win it needs to win atleast 113 seats. It so happens that if a party doesn’t receive the required seats, other parties can support and form a government. Looking at the past elections, we notice the following:</p>
+<div class="figure">
+<img src="/img/Karnataka_Past_Elections.png" alt="Karnataka Past election results" />
+<p class="caption">Karnataka Past election results</p>
+</div>
+<ul>
+<li>Congress won 5 out of 9 elections in the past. Years in which congress won include 1978, 1989, 1999, 2004 and 2013.</li>
+<li>Of all the 9 elections, in 1983, 2004 &amp; 2008 none of the parties received majority
+<ul>
+<li>In 1983 Janta Party formed government from the support with BJP</li>
+<li>In 2004, Congress was supported by JD(S) and formed the government</li>
+<li>In 2008, BJP combined with independently contesting candidates to form the government for the first time.</li>
+</ul></li>
+</ul>
+</div>
+<div id="of-the-224-seats-91-seats-have-a-medium-to-high-probability-of-congress-winning-them" class="section level2">
+<h2>Of the 224 seats, 91 seats have a medium to high probability of Congress winning them</h2>
+<p>Now that we know that Congress won most of the elections, can we project what all constituencies are likely to show affiliations towards the Congress? For the 169 constituencies that exist from 1978, I assigned weights to each of the elections which decreased exponentially. For each election and constituency, I created one hot encoded variables for 3 parties, Congress, BJP and JD(S). I multiplied the weights to each of the one-hot encoded values. I added the multiplied weights and divided by the sum of weights. Thus obtained score is the probability with which a particular party is affiliated to that particular constituency.</p>
+<div class="figure">
+<img src="/img/prbob_scores.PNG" alt="Weighted average probability scores sample" />
+<p class="caption">Weighted average probability scores sample</p>
+</div>
+<p>Once these scores are obtained, I divided them into 2 categories. Scores greater than with <em>greater than or equal to 75%</em> and <em>greater than 50% and less than 75%</em>. These mapped on the Karnataka constituency map is shown below</p>
+<div class="figure">
+<img src="/img/Karnataka_Seat_Projections.png" alt="Karnataka constituency party affiliation scores mapped" />
+<p class="caption">Karnataka constituency party affiliation scores mapped</p>
+</div>
+<p>Converting the above into numbers:</p>
+<ul>
+<li>91 constituencies show medium to strong affiliation towards Congress (47 Strong; 44 Medium)</li>
+<li>25 constituencies show medium to strong affiliation towards BJP (19 Strong; 6 Medium)</li>
+<li>36 constituencies show medium to strong affiliation towards JD(S) (13 Strong; 23 Medium)</li>
+</ul>
+<p>Again, these constitute to only 169 constituencies and though according to method, the election seems to favor Congress, the election can go either way depending on the performance of the unscored 55 constituencies. Let’s map back after elections and see how close was I with respect to this forecast :)</p>
+</div>
+<div id="data-and-maps-sources" class="section level2">
+<h2>Data and maps sources</h2>
+<p>Data for this analysis was obtained from <a href="https://github.com/datameet/india-election-data/tree/master/assembly-elections">Datameet’s github</a>. The maps were created using <a href="https://gramener.com/">Gramener’s</a> proprietary <a href="https://gramener.com/indiamap/">Excel Maps tool</a>. I will update the code for this analysis post election :)</p>
+</div>
