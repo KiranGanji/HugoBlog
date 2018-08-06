@@ -1,0 +1,1954 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Example blog">
+
+
+    <meta property="twitter:site" content="@GanjiKiran9">
+
+<meta property="og:site_name" content="Kiran Ganji" />
+<meta property="og:locale" content="nn_NO" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/getting-started-with-data.table/" />
+<meta property="og:title" content="Getting started with data.table" />
+<meta property="twitter:title" content="Getting started with data.table">
+
+    <meta property="twitter:card" content="summary">
+
+<meta property="og:description" content="">
+<meta property="twitter:description" content="">
+
+<title>
+
+
+     Kiran Ganji - Getting started with data.table 
+
+</title>
+<link rel="canonical" href="/blog/getting-started-with-data.table/">
+
+
+<style media="screen">
+  @font-face {
+  font-family: 'Nexa Bold';
+  src: url('/fonts/Nexa Bold.otf');
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, div.column {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+a,
+a:visited,
+a:focus,
+a:active {
+  text-decoration: none;
+}
+html {
+  height: 100%;
+  font-size: 16px;
+}
+body {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: flex-start;
+  -moz-justify-content: flex-start;
+  -ms-justify-content: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 100%;
+  font-weight: 400;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  color: #111111;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility !important;
+}
+.icon {
+  text-rendering: geometricPrecision !important;
+}
+section {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  width: 100%;
+}
+div.column {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  width: 100%;
+}
+.container {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  width: 100%;
+}
+div.header .container {
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+}
+div.header .content {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+div.header .container .logo {
+  max-width: 100px;
+  margin-left: -2em;
+}
+div.header .name {
+  padding-top: 20px;
+  font-size: 28px;
+  font-family: 'Nexa Bold', 'Helvetica Neue', 'Arial', sans-serif;
+  letter-spacing: -0.005rem;
+  text-transform: uppercase;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  color: #333333;
+}
+div.header nav {
+  margin-bottom: 16px;
+}
+div.header nav ul {
+  list-style: none;
+  text-align: center;
+  display: -webkit-inline-flex;
+  display: -moz-inline-flex;
+  display: -ms-inline-flexbox;
+  display: -ms-inline-flex;
+  display: inline-flex;
+}
+div.header nav ul li {
+  margin-left: 6px;
+  margin-right: 6px;
+}
+div.header nav ul li:first-child {
+  margin-left: 0;
+}
+div.header nav ul li:last-child {
+  margin-right: 0;
+}
+div.header nav ul a {
+  color: #555555;
+  font-weight: 400;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  -webkit-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -moz-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -ms-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -o-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+}
+div.header nav ul a:hover {
+  color: #111111;
+}
+div.footer .container {
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  flex-direction: column-reverse;
+  width: 100%;
+  text-align: center;
+}
+div.footer .container a {
+  font-size: 14px;
+  margin-left: 6px;
+  margin-right: 6px;
+  opacity: 0.6;
+  -webkit-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -moz-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -ms-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -o-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+}
+div.footer .container a:first-child {
+  margin-left: 0;
+}
+div.footer .container a:last-child {
+  margin-right: 0;
+}
+div.footer .container a:hover {
+  opacity: 0.8;
+}
+div.footer .container a .icon {
+  width: 16px;
+  height: 16px;
+}
+div.footer .container .copyright {
+  flex-grow: 0.5;
+  text-align: start;
+}
+div.footer .container .icons {
+  flex-grow: 0.5;
+  text-align: end;
+}
+div.main .container {
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: flex-start;
+  -moz-justify-content: flex-start;
+  -ms-justify-content: flex-start;
+  justify-content: flex-start;
+}
+div.main .content {
+  color: #111111;
+  font-size: 16px;
+}
+div.main .content .title-container {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+}
+div.main .content .posts {
+  margin-bottom: 4em;
+}
+div.main .content .page-heading {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  letter-spacing: -0.005rem;
+  text-transform: uppercase;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  color: #333333;
+  margin-bottom: 16px;
+}
+div.main .content .front-matter .page-heading {
+  margin-bottom: 0;
+}
+div.main .content .front-matter .meta {
+  font-size: 14px;
+  color: #666666;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  margin-bottom: 32px;
+}
+div.main .content .front-matter .date,
+div.main .content .front-matter .author,
+div.main .content .front-matter .tags,
+div.main .content .front-matter .word-count,
+div.main .content .front-matter .middot:before {
+  display: none;
+}
+div.main .content .front-matter .middot:before {
+  font-size: 6px;
+  margin: 0 6px;
+  vertical-align: middle;
+  content: "•";
+}
+div.main .content .front-matter .tags ul {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+div.main .content .front-matter .tags ul li {
+  -webkit-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -moz-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -ms-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -o-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+}
+div.main .content .front-matter .tags ul li:hover {
+  opacity: 0.7;
+}
+div.main .content .front-matter .tags ul li a {
+  color: #666666;
+}
+div.main .container.f04 {
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+}
+div.main .container.f04 .content {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+div.main .container.f04 .content .num {
+  margin: 30px 0px 30px 0;
+  font-weight: 400;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-size: 50px;
+}
+div.main .container.f04 .content .detail {
+  margin-bottom: 40px;
+}
+div.main .container .content .groupby {
+  margin-top: 1em;
+  padding-left: 0.5em;
+}
+div.main .container .content .post-item {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  display: list-item;
+  list-style: disc inside;
+}
+div.main .container .content .post-item .meta {
+  font-size: 14px;
+  color: #666666;
+  display: none;
+  min-width: 100px;
+}
+div.main .container .content .see-more {
+  font-style: italic;
+  float: right;
+  font-size: 0.9em;
+  margin-top: 2em;
+  color: #313537;
+}
+div.main .container .content .see-more:hover {
+  color: #666;
+}
+section {
+  padding: 0 16px;
+}
+div.column {
+  padding: 0 16px;
+}
+div.header {
+  padding-top: 10px;
+}
+div.header-home {
+  padding-top: 36px;
+}
+div.main {
+  padding-top: 32px;
+}
+div.main .container .content .post-item .meta {
+    display: block;
+}
+div.main .container .content .post-item {
+    display: flex;
+    list-style: none;
+}
+a {
+  color: #428bca;
+  -webkit-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -moz-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -ms-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -o-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+}
+a:hover {
+  color: #2a6496;
+}
+img {
+  max-width: 100%;
+}
+div.main .content {
+    width: 100%;
+}
+div.main .content .markdown {
+  font-size: 1.1em;
+  line-height: 1.75em;
+  color: #313537;
+  font-family: serif;
+  font-weight: 300;
+}
+div.main .content .markdown h1,
+div.main .content .markdown h2,
+div.main .content .markdown h3,
+div.main .content .markdown h4,
+div.main .content .markdown h5,
+div.main .content .markdown h6 {
+  font-size: 22px;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  letter-spacing: -0.005rem;
+  font-weight: 700;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  color: #333333;
+  text-transform: none;
+  margin-top: 1.75rem;
+}
+div.main .content .markdown h1 {
+  font-size: 1.75rem;
+  margin-bottom: 2rem;
+}
+div.main .content .markdown h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+div.main .content .markdown h3 {
+  font-size: 1em;
+  margin-bottom: 1rem;
+}
+div.main .content .markdown h4,
+div.main .content .markdown h5,
+div.main .content .markdown h6 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  letter-spacing: none;
+}
+div.main .content .markdown code,
+div.main .content .markdown pre {
+  font-family: 'Menlo', monospace;
+  font-size: 0.98rem;
+  background-color: #f7f7f7;
+}
+div.main .content .markdown code {
+  /* enclosed by single backtick (`) */
+  padding: .15em .5em;
+  border-radius: 2px;
+}
+div.main .content .markdown pre {
+  /* Hugo specific: consider using the 'highlight' shortcode */
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  line-height: 1.5em;
+  white-space: pre;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+div.main .content .markdown pre code {
+  /* enclosed by 4 backticks (````) */
+  padding: 0;
+  font-size: 0.9rem;
+}
+div.main .content .markdown a code {
+  color: #428bca !important;
+}
+div.main .content .markdown a code:hover {
+  text-decoration: underline;
+}
+div.main .content .markdown p {
+  
+  text-align: justify;
+  
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+div.main .content .markdown ul,
+div.main .content .markdown ol,
+div.main .content .markdown dl {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+div.main .content .markdown dt {
+  font-weight: bold;
+}
+div.main .content .markdown dd {
+  margin-bottom: .5rem;
+}
+div.main .content .markdown ul {
+  list-style-type: disc;
+  list-style-position: outside;
+  margin-bottom: 1.25rem;
+}
+div.main .content .markdown ol {
+  list-style-type: decimal;
+  margin-bottom: 1.25rem;
+}
+div.main .content .markdown li {
+  margin-left: 2em;
+}
+div.main .content .markdown em {
+  font-style: italic;
+}
+div.main .content .markdown strong {
+  font-weight: 700;
+}
+div.main .content .markdown hr {
+  position: relative;
+  margin: 1.75rem 0;
+  border: 0;
+  border-top: 1px solid #808080;
+  border-top: 1px solid #999999;
+}
+div.main .content .markdown abbr {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #666666;
+  text-transform: uppercase;
+}
+div.main .content .markdown abbr[title] {
+  cursor: help;
+  border-bottom: 1px dotted #808080;
+}
+div.main .content .markdown blockquote {
+  padding: .5rem 1rem;
+  margin: .8rem 0;
+  color: #7a7a7a;
+  border-left: .25rem solid #e5e5e5;
+}
+div.main .content .markdown blockquote p:last-child {
+  margin-bottom: 0;
+}
+div.main .content .markdown figure {
+  width: 100%;
+  background: #fff;
+  margin-bottom: 1em;
+}
+div.main .content .markdown figure img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+  position: static;
+  margin: auto;
+}
+div.main .content .markdown table {
+  margin-bottom: 1rem;
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  border-collapse: collapse;
+}
+div.main .content .markdown td,
+div.main .content .markdown th {
+  padding: .25rem .5rem;
+  border: 1px solid #e5e5e5;
+}
+div.main .content .markdown tbody tr:nth-child(odd) td,
+div.main .content .markdown tbody tr:nth-child(odd) th {
+  background-color: #f7f7f7;
+}
+div.main .content .markdown .footnotes ol {
+  list-style-type: decimal;
+  margin-left: 16px;
+}
+div.main .content .markdown .footnotes li {
+  list-style-type: unset;
+}
+div.main .content .markdown .footnote-ref {
+  font-size: 0.7em;
+}
+div.main .content .navigation {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  padding: 2em;
+}
+div.main .content .navigation div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  margin-top: 1em;
+}
+div.main .content .navigation .icon {
+  width: 16px;
+  height: 16px;
+}
+div.main .content .navigation a {
+  width: 250px;
+  margin: 0 1em;
+  text-align: center;
+  font-style: italic;
+  color: #313537;
+}
+div.main .content .share, div.main .content .share div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: center;
+}
+div.main .content .share {
+  background-color: rgba(152, 152, 152, 0.07);
+  padding: 1em 0;
+}
+div.main .content .share a {
+  margin: 0 6px;
+}
+kbd {
+  padding: 0.1em 0.6em;
+  border: 1px solid #ccc;
+  font-size: 11px;
+  font-family: Arial,Helvetica,sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+  -moz-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+  -webkit-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  display: inline-block;
+  margin: 0 0.1em;
+  text-shadow: 0 1px 0 #fff;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* Fonts */
+
+
+.wf-raleway-n4-active body, 
+.wf-raleway-n4-active div.header nav ul a,
+.wf-raleway-n7-active div.main .content .page-heading,
+.wf-raleway-n2-active div.main .container.f04 .content .num,
+.wf-raleway-n7-active div.main .content .markdown h1,
+.wf-raleway-n7-active div.main .content .markdown h2,
+.wf-raleway-n7-active div.main .content .markdown h3,
+.wf-raleway-n7-active div.main .content .markdown h4,
+.wf-raleway-n7-active div.main .content .markdown h5,
+.wf-raleway-n7-active div.main .content .markdown h6 {
+      font-family: 'Raleway';
+}
+
+.wf-merriweather-n3-active div.main .content .markdown {
+      font-family: 'Merriweather';
+}
+
+.wf-ubuntu-mono-n4-active div.main .content .markdown code,
+.wf-ubuntu-mono-n4-active div.main .content .markdown pre {
+      font-family: 'Ubuntu Mono';
+}
+
+
+</style>
+<style media="(min-width: 600px)">
+  body {
+-webkit-justify-content: center;
+-moz-justify-content: center;
+-ms-justify-content: center;
+justify-content: center;
+}
+.non-narrow.zero-top-spacing {
+padding-top: 0 !important;
+}
+section {
+padding: 0 16px;
+margin-left: 100px;
+margin-right: 100px;
+max-width: 750px;
+}
+div.column {
+padding: 0 16px;
+max-width: 750px;
+}
+div.header {
+background-color: transparent;
+}
+div.header .container {
+-webkit-justify-content: flex-start;
+-moz-justify-content: flex-start;
+-ms-justify-content: flex-start;
+justify-content: flex-start;
+}
+div.header .container .logo {
+margin: 0;
+}
+div.header-home .container .logo {
+max-width: 180px;
+margin-left: 20px;
+}
+div.header-home .name-home {
+padding-top: 30px;
+font-size: 40px;
+}
+div.header-home nav ul a {
+font-size: 18px;
+}
+div.header .content {
+-webkit-align-items: flex-start;
+-moz-align-items: flex-start;
+-ms-align-items: flex-start;
+align-items: flex-start;
+}
+div.header .name {
+color: #333333;
+}
+div.header nav {
+font-size: 14px;
+margin-bottom: 0;
+}
+div.header nav ul {
+text-align: left;
+}
+div.header nav ul a {
+color: #666666;
+}
+div.header nav ul a:hover {
+color: #333333;
+}
+div.footer {
+background-color: transparent;
+}
+div.footer .container {
+flex-direction: row;
+}
+div.footer .container a {
+margin-left: 3px;
+margin-right: 3px;
+color: #666666;
+}
+div.footer .container a:hover {
+color: #333333;
+}
+div.footer .container a .icon {
+font-size: 18px;
+}
+div.footer .container a .icon.larger {
+font-size: 20px;
+}
+div.main .content .front-matter .date,
+div.main .content .front-matter .author,
+div.main .content .front-matter .tags,
+div.main .content .front-matter .word-count,
+div.main .content .front-matter .middot:before {
+display: initial;
+}
+div.main .container.f04 {
+-webkit-justify-content: flex-start;
+-moz-justify-content: flex-start;
+-ms-justify-content: flex-start;
+justify-content: flex-start;
+}
+div.main .container.f04 .content {
+-webkit-align-items: flex-start;
+-moz-align-items: flex-start;
+-ms-align-items: flex-start;
+align-items: flex-start;
+}
+div.main .container.f04 .content .num {
+margin: 0 0 10px 0;
+font-size: 32px;
+}
+div.main .container.f04 .content .detail {
+margin-bottom: 30px;
+}
+.container {
+padding: 0 30px;
+}
+div.header {
+padding-top: 60px;
+padding-bottom: 60px;
+}
+div.footer {
+padding-top: 30px;
+padding-bottom: 60px;
+}
+div.main {
+padding-top: 0;
+}
+div.main .container .content .post-item {
+display: flex;
+list-style: none;
+padding-left: 1.5em;
+}
+div.main .container .content .post-item .meta {
+display: block;
+}
+div.main.post {
+padding-top: 60px;
+padding-bottom: 60px;
+}
+div.main .content .markdown blockquote {
+padding-right: 5rem;
+padding-left: 1.25rem;
+}
+div.main .content .navigation {
+-webkit-flex-direction: row;
+-moz-flex-direction: row;
+-ms-flex-direction: row;
+flex-direction: row;
+}
+div.main .content .navigation div {
+margin-top: 0em;
+}
+
+</style>
+<style media="(min-width: 769px)">
+  div.main .content .markdown figure {
+width: 110%;
+margin-left: -4%;
+}
+div.main .content .markdown img {
+max-width: 110%;
+width: 110%;
+margin-left: -4%;
+}
+div.main .content .markdown pre {
+width: 110%;
+margin-left: -4%;
+}
+
+</style>
+
+<noscript>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet">
+</noscript>
+
+
+  <style type="text/css" media="screen">
+    .hljs{display:block;background:white;padding:0.5em;color:#333333;overflow-x:auto}.hljs-comment,.hljs-meta{color:#969896}.hljs-string,.hljs-variable,.hljs-template-variable,.hljs-strong,.hljs-emphasis,.hljs-quote{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#a71d5d}.hljs-literal,.hljs-symbol,.hljs-bullet,.hljs-attribute{color:#0086b3}.hljs-section,.hljs-name{color:#63a35c}.hljs-tag{color:#333333}.hljs-title,.hljs-attr,.hljs-selector-id,.hljs-selector-class,.hljs-selector-attr,.hljs-selector-pseudo{color:#795da3}.hljs-addition{color:#55a532;background-color:#eaffea}.hljs-deletion{color:#bd2c00;background-color:#ffecec}.hljs-link{text-decoration:underline}
+  </style>
+
+
+
+  <style type="text/css" media="screen">
+    .progressive{overflow:hidden;position:relative;background:#efefef}.progressive__img{width:100%;height:100%;position:absolute;-webkit-transform:translateZ(0);transform:translateZ(0)}.progressive--not-loaded{filter:blur(30px);-webkit-filter:blur(30px)}.progressive--is-loaded{filter:blur(20px);-webkit-filter:blur(20px);-webkit-animation:sharpen .5s both;animation:sharpen .5s both}@-webkit-keyframes sharpen{from{filter:blur(20px);-webkit-filter:blur(20px)}to{filter:blur(0);-webkit-filter:blur(0)}}@keyframes sharpen{from{filter:blur(20px);-webkit-filter:blur(20px)}to{filter:blur(0);-webkit-filter:blur(0)}}
+  </style>
+
+
+
+
+
+  <style type="text/css" media="screen">
+    a {
+    color: #527fc1f;
+}
+
+a:hover {
+    color: #1a3152;
+}
+
+div.main .content .markdown, div.header .name, div.header nav ul a:hover {
+    color: #181d2a;
+}
+
+div.header nav ul a {
+    color: #6a7a8b;
+}
+
+div.main .content .markdown code {
+    background-color: #f9f9f9;
+    color: #527fc1f;
+}
+
+div.main .content .markdown pre, div.main .content .markdown pre code {
+    background-color: #282a36;
+    color: #87a5d2;
+}
+
+.hljs, .hljs-subst, .hljs-variable {
+    color: #87a5d2;
+}
+
+.hljs-type {
+    color: #97d28b;
+}
+
+.hljs-quote {
+    color: #ffcb8d;
+}
+
+.hljs-string, .hljs-number, .hljs-selector-id, .hljs-selector-class, .hljs-template-tag, .hljs-deletion {
+    color: #96c2d7;
+}
+
+.hljs-comment {
+    color: #6a7a8b;
+}
+
+.hljs-regexp, .hljs-symbol, .hljs-template-variable {
+    color: #ffcb8d;
+}
+
+.hljs-keyword, .hljs-attribute, .hljs-meta-keyword, .hljs-doctag, .hljs-name {
+    color: #97d28b;
+}
+
+.hljs-link, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-title, .hljs-section {
+    color: #ff8e91;
+}
+
+.hljs-built_in, .hljs-bullet, .hljs-code, .hljs-addition {
+    color: #97d28b;
+}
+
+.ssk {
+    background-color: #6a7a8b;
+}
+
+  </style>
+
+
+
+
+
+
+
+<link rel="shortcut icon"
+
+    href="/img/logo2.png"
+
+>
+
+
+
+
+</head>
+
+
+<body>
+
+
+<div class="header column">
+
+    <div class="container">
+        
+        <a href="/"><img class="logo" src="/img/logo2.png" alt="logo"></a>
+        
+        <div class="content">
+            <a href="/"><div class="name"><h1>Kiran Ganji</h1></div></a>
+            <nav>
+                <ul>
+                    
+                        <li><a href="/blog/">Blog</a></li>
+                    
+                    
+                        
+                            
+                        
+                    
+                    
+                        
+                            <li><a href="/about/">About</a></li>
+                        
+                    
+                        
+                            <li><a href="/resume/">Resume</a></li>
+                        
+                    
+                        
+                    
+                        
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+<div class="main post non-narrow zero-top-spacing column">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Getting started with data.table
+
+</div>
+
+                </div>
+                <div class="meta">
+                    <div class="date" title="Tue Jun 12 2018 00:00:00 UTC">Jun 12, 2018</div>
+                    
+                        
+                        <div class="author middot" title="Kiran Ganji">Kiran Ganji</div>
+                        
+                    
+                    <div class="reading-time middot">19 minute read</div>
+                    <div class="tags">
+                        <ul>
+                          
+                        </ul>
+                    </div>
+                    <div class="tags">
+                        <ul>
+                          
+                          
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+    
+    <div id="data.table-outperforms-data.frame-in-atleast-4-different-areas" class="section level2">
+<h2>data.table outperforms data.frame in atleast 4 different areas</h2>
+<p>The following are few reasons why one should prefer data.table instead of data.frame</p>
+<ul>
+<li><strong>Easier</strong> to process large datasets</li>
+<li><strong>Faster</strong> data manipulations</li>
+<li><strong>Shorter</strong> syntaxes</li>
+<li><strong>Better</strong> summary representation</li>
+</ul>
+</div>
+<div id="after-this-presentation-you-wont-need-data.frame-because-we-are-going-to" class="section level2">
+<h2>After this presentation, you won’t need data.frame because we are going to…</h2>
+<ul>
+<li>Create a data.table using <strong>fread, data.table() and as.data.table</strong></li>
+<li>Understand the two comma notation of data.table</li>
+<li>Subset the data on rows, columns and both</li>
+<li>Create a new column in data.table using <strong>:=</strong></li>
+<li>Sort a data.table using <strong>setorder</strong></li>
+<li>Update values using <strong>:=</strong></li>
+<li>Delete columns using <strong>:=NULL</strong></li>
+<li>Remove duplicates using <strong>duplicated</strong></li>
+<li>Aggregate the data using <strong>list() and by=list()</strong></li>
+<li>Impute missing values using <strong>:=</strong> and <strong>set</strong></li>
+<li>Apply functions across the rows using <strong>by=1:nrow()</strong> and <strong>.SDcols</strong></li>
+</ul>
+</div>
+<div id="i-am-going-to-use-iris-data-for-demonstration.-what-a-cliche-right" class="section level2">
+<h2>I am going to use iris data for demonstration. What a cliche right ;)</h2>
+<p>We will be using the pre-built dataset, <strong>iris</strong>, to get familiar with various syntaxes of data.table. Lets begin by loading the datasets in R</p>
+<pre class="r"><code>library(data.table)
+
+data(iris)
+DataDfI &lt;- data.table(iris)</code></pre>
+<p>The above code just loads the dataset into R enivronment. I will be using the variable <strong>DataDfI</strong> from here on in the presentation to indicate iris data</p>
+</div>
+<div id="creating-a-data.table-using-fread-data.table-and-as.data.table" class="section level2">
+<h2>Creating a data.table using fread(), data.table() and as.data.table</h2>
+<p>You can create a data.table from vectors, matrices and csv files. Let’s take a look at how this can be achieved</p>
+<pre class="r"><code>#Using data.table() function - For data frames and vectors
+DataDf &lt;- data.table(iris) #Assume iris is a dataframe
+write.csv(DataDf,&quot;Data/iris.csv&quot;)
+
+#Using data.table() function - For vectors
+ids &lt;- letters 
+values &lt;- seq(1,26,1)
+DataDf &lt;- data.table(Column = ids, Value = values)
+
+#Using as.data.table() - For matrices
+DataDf &lt;- as.data.table(as.matrix(iris))
+
+#Using fread - For csv files
+DataDf &lt;- fread(&quot;Data/iris.csv&quot;)</code></pre>
+</div>
+<div id="understanding-the-two-comma-notation-of-data.table" class="section level2">
+<h2>Understanding the two comma notation of data.table</h2>
+<p>Unlike data.frame, data.table can take 3 arguments. Lets understand them:</p>
+<pre class="r"><code># DataDf[i,j,k]</code></pre>
+<p>i - row selection j - column selection k - aggregation paramters</p>
+<p><strong>Note:</strong> Unlike data.frame, data.table does not require column names to be given in quotes</p>
+<pre class="r"><code>DataDfI[Sepal.Length &gt; 5,,]#Select one row</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          5.1         3.5          1.4         0.2    setosa
+##   2:          5.4         3.9          1.7         0.4    setosa
+##   3:          5.4         3.7          1.5         0.2    setosa
+##   4:          5.8         4.0          1.2         0.2    setosa
+##   5:          5.7         4.4          1.5         0.4    setosa
+##  ---                                                            
+## 114:          6.7         3.0          5.2         2.3 virginica
+## 115:          6.3         2.5          5.0         1.9 virginica
+## 116:          6.5         3.0          5.2         2.0 virginica
+## 117:          6.2         3.4          5.4         2.3 virginica
+## 118:          5.9         3.0          5.1         1.8 virginica</code></pre>
+</div>
+<div id="subsetting-the-data-on-rows" class="section level2">
+<h2>Subsetting the data on rows</h2>
+<p>Filter conditions on rows can be supplied as the first arguement of the data.table</p>
+<p>Subset rows using one condition</p>
+<pre class="r"><code>DataDfI[Sepal.Length &gt; 5,,]</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          5.1         3.5          1.4         0.2    setosa
+##   2:          5.4         3.9          1.7         0.4    setosa
+##   3:          5.4         3.7          1.5         0.2    setosa
+##   4:          5.8         4.0          1.2         0.2    setosa
+##   5:          5.7         4.4          1.5         0.4    setosa
+##  ---                                                            
+## 114:          6.7         3.0          5.2         2.3 virginica
+## 115:          6.3         2.5          5.0         1.9 virginica
+## 116:          6.5         3.0          5.2         2.0 virginica
+## 117:          6.2         3.4          5.4         2.3 virginica
+## 118:          5.9         3.0          5.1         1.8 virginica</code></pre>
+<p>Subset rows using two condition</p>
+<pre class="r"><code>DataDfI[Sepal.Length &gt; 5 &amp; Sepal.Width &gt; 3.2,,]</code></pre>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+##  1:          5.1         3.5          1.4         0.2     setosa
+##  2:          5.4         3.9          1.7         0.4     setosa
+##  3:          5.4         3.7          1.5         0.2     setosa
+##  4:          5.8         4.0          1.2         0.2     setosa
+##  5:          5.7         4.4          1.5         0.4     setosa
+##  6:          5.4         3.9          1.3         0.4     setosa
+##  7:          5.1         3.5          1.4         0.3     setosa
+##  8:          5.7         3.8          1.7         0.3     setosa
+##  9:          5.1         3.8          1.5         0.3     setosa
+## 10:          5.4         3.4          1.7         0.2     setosa
+## 11:          5.1         3.7          1.5         0.4     setosa
+## 12:          5.1         3.3          1.7         0.5     setosa
+## 13:          5.2         3.5          1.5         0.2     setosa
+## 14:          5.2         3.4          1.4         0.2     setosa
+## 15:          5.4         3.4          1.5         0.4     setosa
+## 16:          5.2         4.1          1.5         0.1     setosa
+## 17:          5.5         4.2          1.4         0.2     setosa
+## 18:          5.5         3.5          1.3         0.2     setosa
+## 19:          5.1         3.4          1.5         0.2     setosa
+## 20:          5.1         3.8          1.9         0.4     setosa
+## 21:          5.1         3.8          1.6         0.2     setosa
+## 22:          5.3         3.7          1.5         0.2     setosa
+## 23:          6.3         3.3          4.7         1.6 versicolor
+## 24:          6.0         3.4          4.5         1.6 versicolor
+## 25:          6.3         3.3          6.0         2.5  virginica
+## 26:          7.2         3.6          6.1         2.5  virginica
+## 27:          7.7         3.8          6.7         2.2  virginica
+## 28:          6.7         3.3          5.7         2.1  virginica
+## 29:          7.9         3.8          6.4         2.0  virginica
+## 30:          6.3         3.4          5.6         2.4  virginica
+## 31:          6.7         3.3          5.7         2.5  virginica
+## 32:          6.2         3.4          5.4         2.3  virginica
+##     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species</code></pre>
+<p>Subset rows greater than mean</p>
+<pre class="r"><code>DataDfI[Sepal.Length &gt; mean(Sepal.Length) ,,]</code></pre>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+##  1:          7.0         3.2          4.7         1.4 versicolor
+##  2:          6.4         3.2          4.5         1.5 versicolor
+##  3:          6.9         3.1          4.9         1.5 versicolor
+##  4:          6.5         2.8          4.6         1.5 versicolor
+##  5:          6.3         3.3          4.7         1.6 versicolor
+##  6:          6.6         2.9          4.6         1.3 versicolor
+##  7:          5.9         3.0          4.2         1.5 versicolor
+##  8:          6.0         2.2          4.0         1.0 versicolor
+##  9:          6.1         2.9          4.7         1.4 versicolor
+## 10:          6.7         3.1          4.4         1.4 versicolor
+## 11:          6.2         2.2          4.5         1.5 versicolor
+## 12:          5.9         3.2          4.8         1.8 versicolor
+## 13:          6.1         2.8          4.0         1.3 versicolor
+## 14:          6.3         2.5          4.9         1.5 versicolor
+## 15:          6.1         2.8          4.7         1.2 versicolor
+## 16:          6.4         2.9          4.3         1.3 versicolor
+## 17:          6.6         3.0          4.4         1.4 versicolor
+## 18:          6.8         2.8          4.8         1.4 versicolor
+## 19:          6.7         3.0          5.0         1.7 versicolor
+## 20:          6.0         2.9          4.5         1.5 versicolor
+## 21:          6.0         2.7          5.1         1.6 versicolor
+## 22:          6.0         3.4          4.5         1.6 versicolor
+## 23:          6.7         3.1          4.7         1.5 versicolor
+## 24:          6.3         2.3          4.4         1.3 versicolor
+## 25:          6.1         3.0          4.6         1.4 versicolor
+## 26:          6.2         2.9          4.3         1.3 versicolor
+## 27:          6.3         3.3          6.0         2.5  virginica
+## 28:          7.1         3.0          5.9         2.1  virginica
+## 29:          6.3         2.9          5.6         1.8  virginica
+## 30:          6.5         3.0          5.8         2.2  virginica
+## 31:          7.6         3.0          6.6         2.1  virginica
+## 32:          7.3         2.9          6.3         1.8  virginica
+## 33:          6.7         2.5          5.8         1.8  virginica
+## 34:          7.2         3.6          6.1         2.5  virginica
+## 35:          6.5         3.2          5.1         2.0  virginica
+## 36:          6.4         2.7          5.3         1.9  virginica
+## 37:          6.8         3.0          5.5         2.1  virginica
+## 38:          6.4         3.2          5.3         2.3  virginica
+## 39:          6.5         3.0          5.5         1.8  virginica
+## 40:          7.7         3.8          6.7         2.2  virginica
+## 41:          7.7         2.6          6.9         2.3  virginica
+## 42:          6.0         2.2          5.0         1.5  virginica
+## 43:          6.9         3.2          5.7         2.3  virginica
+## 44:          7.7         2.8          6.7         2.0  virginica
+## 45:          6.3         2.7          4.9         1.8  virginica
+## 46:          6.7         3.3          5.7         2.1  virginica
+## 47:          7.2         3.2          6.0         1.8  virginica
+## 48:          6.2         2.8          4.8         1.8  virginica
+## 49:          6.1         3.0          4.9         1.8  virginica
+## 50:          6.4         2.8          5.6         2.1  virginica
+## 51:          7.2         3.0          5.8         1.6  virginica
+## 52:          7.4         2.8          6.1         1.9  virginica
+## 53:          7.9         3.8          6.4         2.0  virginica
+## 54:          6.4         2.8          5.6         2.2  virginica
+## 55:          6.3         2.8          5.1         1.5  virginica
+## 56:          6.1         2.6          5.6         1.4  virginica
+## 57:          7.7         3.0          6.1         2.3  virginica
+## 58:          6.3         3.4          5.6         2.4  virginica
+## 59:          6.4         3.1          5.5         1.8  virginica
+## 60:          6.0         3.0          4.8         1.8  virginica
+## 61:          6.9         3.1          5.4         2.1  virginica
+## 62:          6.7         3.1          5.6         2.4  virginica
+## 63:          6.9         3.1          5.1         2.3  virginica
+## 64:          6.8         3.2          5.9         2.3  virginica
+## 65:          6.7         3.3          5.7         2.5  virginica
+## 66:          6.7         3.0          5.2         2.3  virginica
+## 67:          6.3         2.5          5.0         1.9  virginica
+## 68:          6.5         3.0          5.2         2.0  virginica
+## 69:          6.2         3.4          5.4         2.3  virginica
+## 70:          5.9         3.0          5.1         1.8  virginica
+##     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species</code></pre>
+</div>
+<div id="subsetting-the-data-on-columns" class="section level2">
+<h2>Subsetting the data on columns</h2>
+<p>One can select a column in data.table by passing the column name as second argument. The result in doing so will be a vector</p>
+<pre class="r"><code># Select rows with greater than mean
+DataDfI[,Sepal.Length,]</code></pre>
+<pre><code>##   [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4
+##  [18] 5.1 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4 5.2 5.5
+##  [35] 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4.8 5.1 4.6 5.3 5.0 7.0
+##  [52] 6.4 6.9 5.5 6.5 5.7 6.3 4.9 6.6 5.2 5.0 5.9 6.0 6.1 5.6 6.7 5.6 5.8
+##  [69] 6.2 5.6 5.9 6.1 6.3 6.1 6.4 6.6 6.8 6.7 6.0 5.7 5.5 5.5 5.8 6.0 5.4
+##  [86] 6.0 6.7 6.3 5.6 5.5 5.5 6.1 5.8 5.0 5.6 5.7 5.7 6.2 5.1 5.7 6.3 5.8
+## [103] 7.1 6.3 6.5 7.6 4.9 7.3 6.7 7.2 6.5 6.4 6.8 5.7 5.8 6.4 6.5 7.7 7.7
+## [120] 6.0 6.9 5.6 7.7 6.3 6.7 7.2 6.2 6.1 6.4 7.2 7.4 7.9 6.4 6.3 6.1 7.7
+## [137] 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8 6.7 6.7 6.3 6.5 6.2 5.9</code></pre>
+<p>To retain the data.table structure, the columns should be provided in quotes</p>
+<pre class="r"><code># Select rows with greater than mean
+DataDfI[,&quot;Sepal.Length&quot;,]</code></pre>
+<pre><code>##      Sepal.Length
+##   1:          5.1
+##   2:          4.9
+##   3:          4.7
+##   4:          4.6
+##   5:          5.0
+##  ---             
+## 146:          6.7
+## 147:          6.3
+## 148:          6.5
+## 149:          6.2
+## 150:          5.9</code></pre>
+<p>To retain data.table structure, multiple columns should be provided as vectors</p>
+<pre class="r"><code># Select rows with greater than mean
+DataDfI[,c(&quot;Sepal.Length&quot;,&quot;Sepal.Length&quot;),]</code></pre>
+<pre><code>##      Sepal.Length Sepal.Length
+##   1:          5.1          5.1
+##   2:          4.9          4.9
+##   3:          4.7          4.7
+##   4:          4.6          4.6
+##   5:          5.0          5.0
+##  ---                          
+## 146:          6.7          6.7
+## 147:          6.3          6.3
+## 148:          6.5          6.5
+## 149:          6.2          6.2
+## 150:          5.9          5.9</code></pre>
+</div>
+<div id="subsetting-based-on-rows-and-columns" class="section level2">
+<h2>Subsetting based on rows and columns</h2>
+<pre class="r"><code># Subsetting rows and columns
+DataDfI[Sepal.Length &gt; mean(Sepal.Length),c(&quot;Sepal.Length&quot;,&quot;Sepal.Length&quot;),]</code></pre>
+<pre><code>##     Sepal.Length Sepal.Length
+##  1:          7.0          7.0
+##  2:          6.4          6.4
+##  3:          6.9          6.9
+##  4:          6.5          6.5
+##  5:          6.3          6.3
+##  6:          6.6          6.6
+##  7:          5.9          5.9
+##  8:          6.0          6.0
+##  9:          6.1          6.1
+## 10:          6.7          6.7
+## 11:          6.2          6.2
+## 12:          5.9          5.9
+## 13:          6.1          6.1
+## 14:          6.3          6.3
+## 15:          6.1          6.1
+## 16:          6.4          6.4
+## 17:          6.6          6.6
+## 18:          6.8          6.8
+## 19:          6.7          6.7
+## 20:          6.0          6.0
+## 21:          6.0          6.0
+## 22:          6.0          6.0
+## 23:          6.7          6.7
+## 24:          6.3          6.3
+## 25:          6.1          6.1
+## 26:          6.2          6.2
+## 27:          6.3          6.3
+## 28:          7.1          7.1
+## 29:          6.3          6.3
+## 30:          6.5          6.5
+## 31:          7.6          7.6
+## 32:          7.3          7.3
+## 33:          6.7          6.7
+## 34:          7.2          7.2
+## 35:          6.5          6.5
+## 36:          6.4          6.4
+## 37:          6.8          6.8
+## 38:          6.4          6.4
+## 39:          6.5          6.5
+## 40:          7.7          7.7
+## 41:          7.7          7.7
+## 42:          6.0          6.0
+## 43:          6.9          6.9
+## 44:          7.7          7.7
+## 45:          6.3          6.3
+## 46:          6.7          6.7
+## 47:          7.2          7.2
+## 48:          6.2          6.2
+## 49:          6.1          6.1
+## 50:          6.4          6.4
+## 51:          7.2          7.2
+## 52:          7.4          7.4
+## 53:          7.9          7.9
+## 54:          6.4          6.4
+## 55:          6.3          6.3
+## 56:          6.1          6.1
+## 57:          7.7          7.7
+## 58:          6.3          6.3
+## 59:          6.4          6.4
+## 60:          6.0          6.0
+## 61:          6.9          6.9
+## 62:          6.7          6.7
+## 63:          6.9          6.9
+## 64:          6.8          6.8
+## 65:          6.7          6.7
+## 66:          6.7          6.7
+## 67:          6.3          6.3
+## 68:          6.5          6.5
+## 69:          6.2          6.2
+## 70:          5.9          5.9
+##     Sepal.Length Sepal.Length</code></pre>
+</div>
+<div id="creating-a-new-column-in-data.table-using" class="section level2">
+<h2>Creating a new column in data.table using <strong>:=</strong></h2>
+<p>To generate new columns, we use <strong>:=</strong> syntax. Example shown below.</p>
+<pre class="r"><code>DataDfI[,Sepal.Area := Sepal.Length * Sepal.Width,]
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          5.1         3.5          1.4         0.2    setosa
+##   2:          4.9         3.0          1.4         0.2    setosa
+##   3:          4.7         3.2          1.3         0.2    setosa
+##   4:          4.6         3.1          1.5         0.2    setosa
+##   5:          5.0         3.6          1.4         0.2    setosa
+##  ---                                                            
+## 146:          6.7         3.0          5.2         2.3 virginica
+## 147:          6.3         2.5          5.0         1.9 virginica
+## 148:          6.5         3.0          5.2         2.0 virginica
+## 149:          6.2         3.4          5.4         2.3 virginica
+## 150:          5.9         3.0          5.1         1.8 virginica
+##      Sepal.Area
+##   1:      17.85
+##   2:      14.70
+##   3:      15.04
+##   4:      14.26
+##   5:      18.00
+##  ---           
+## 146:      20.10
+## 147:      15.75
+## 148:      19.50
+## 149:      21.08
+## 150:      17.70</code></pre>
+<p><strong>Note:</strong> The column creation should be done as part of second argument</p>
+<p>One can create multiple columns at one stretch</p>
+<pre class="r"><code>DataDfI[,`:=`(Sepal.Area = Sepal.Length * Sepal.Width,
+              Petal.Area = Petal.Length * Petal.Width),]
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          5.1         3.5          1.4         0.2    setosa
+##   2:          4.9         3.0          1.4         0.2    setosa
+##   3:          4.7         3.2          1.3         0.2    setosa
+##   4:          4.6         3.1          1.5         0.2    setosa
+##   5:          5.0         3.6          1.4         0.2    setosa
+##  ---                                                            
+## 146:          6.7         3.0          5.2         2.3 virginica
+## 147:          6.3         2.5          5.0         1.9 virginica
+## 148:          6.5         3.0          5.2         2.0 virginica
+## 149:          6.2         3.4          5.4         2.3 virginica
+## 150:          5.9         3.0          5.1         1.8 virginica
+##      Sepal.Area Petal.Area
+##   1:      17.85       0.28
+##   2:      14.70       0.28
+##   3:      15.04       0.26
+##   4:      14.26       0.30
+##   5:      18.00       0.28
+##  ---                      
+## 146:      20.10      11.96
+## 147:      15.75       9.50
+## 148:      19.50      10.40
+## 149:      21.08      12.42
+## 150:      17.70       9.18</code></pre>
+<p><strong>Note:</strong> Do not forget to enclose the <strong>:=</strong> by <strong>`</strong></p>
+</div>
+<div id="sorting-a-data.table-using-setorder" class="section level2">
+<h2>Sorting a data.table using <strong>setorder</strong></h2>
+<p>We can use <strong>setorder</strong> synatax for sorting a data table. Example shown below</p>
+<pre class="r"><code># Sort based on the descending order of Petal length
+setorder(DataDfI,-Petal.Length)
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          7.7         2.6          6.9         2.3 virginica
+##   2:          7.7         3.8          6.7         2.2 virginica
+##   3:          7.7         2.8          6.7         2.0 virginica
+##   4:          7.6         3.0          6.6         2.1 virginica
+##   5:          7.9         3.8          6.4         2.0 virginica
+##  ---                                                            
+## 146:          4.4         3.2          1.3         0.2    setosa
+## 147:          5.8         4.0          1.2         0.2    setosa
+## 148:          5.0         3.2          1.2         0.2    setosa
+## 149:          4.3         3.0          1.1         0.1    setosa
+## 150:          4.6         3.6          1.0         0.2    setosa
+##      Sepal.Area Petal.Area
+##   1:      20.02      15.87
+##   2:      29.26      14.74
+##   3:      21.56      13.40
+##   4:      22.80      13.86
+##   5:      30.02      12.80
+##  ---                      
+## 146:      14.08       0.26
+## 147:      23.20       0.24
+## 148:      16.00       0.24
+## 149:      12.90       0.11
+## 150:      16.56       0.20</code></pre>
+<pre class="r"><code># Sort based on the ascending order of Sepal length
+setorder(DataDfI,Sepal.Length)
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          4.3         3.0          1.1         0.1    setosa
+##   2:          4.4         2.9          1.4         0.2    setosa
+##   3:          4.4         3.0          1.3         0.2    setosa
+##   4:          4.4         3.2          1.3         0.2    setosa
+##   5:          4.5         2.3          1.3         0.3    setosa
+##  ---                                                            
+## 146:          7.7         2.6          6.9         2.3 virginica
+## 147:          7.7         3.8          6.7         2.2 virginica
+## 148:          7.7         2.8          6.7         2.0 virginica
+## 149:          7.7         3.0          6.1         2.3 virginica
+## 150:          7.9         3.8          6.4         2.0 virginica
+##      Sepal.Area Petal.Area
+##   1:      12.90       0.11
+##   2:      12.76       0.28
+##   3:      13.20       0.26
+##   4:      14.08       0.26
+##   5:      10.35       0.39
+##  ---                      
+## 146:      20.02      15.87
+## 147:      29.26      14.74
+## 148:      21.56      13.40
+## 149:      23.10      14.03
+## 150:      30.02      12.80</code></pre>
+<p>One can sort based on two columns as well</p>
+<pre class="r"><code># Sort based on the ascending order of Sepal length and then descending order of species
+setorder(DataDfI,Sepal.Length,-Species)
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          4.3         3.0          1.1         0.1    setosa
+##   2:          4.4         2.9          1.4         0.2    setosa
+##   3:          4.4         3.0          1.3         0.2    setosa
+##   4:          4.4         3.2          1.3         0.2    setosa
+##   5:          4.5         2.3          1.3         0.3    setosa
+##  ---                                                            
+## 146:          7.7         2.6          6.9         2.3 virginica
+## 147:          7.7         3.8          6.7         2.2 virginica
+## 148:          7.7         2.8          6.7         2.0 virginica
+## 149:          7.7         3.0          6.1         2.3 virginica
+## 150:          7.9         3.8          6.4         2.0 virginica
+##      Sepal.Area Petal.Area
+##   1:      12.90       0.11
+##   2:      12.76       0.28
+##   3:      13.20       0.26
+##   4:      14.08       0.26
+##   5:      10.35       0.39
+##  ---                      
+## 146:      20.02      15.87
+## 147:      29.26      14.74
+## 148:      21.56      13.40
+## 149:      23.10      14.03
+## 150:      30.02      12.80</code></pre>
+</div>
+<div id="updating-values-using" class="section level2">
+<h2>Updating values using :=</h2>
+<p>To update values in data.table, one can use <strong>:=</strong> operator. Let’s see an example</p>
+<pre class="r"><code>DataDfI[Species == &quot;setosa&quot; &amp; Petal.Length == 1.4,Sepal.Area:=45,]
+DataDfI[Species == &quot;setosa&quot; &amp; Petal.Length == 1.4,,]</code></pre>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal.Area
+##  1:          4.4         2.9          1.4         0.2  setosa         45
+##  2:          4.6         3.4          1.4         0.3  setosa         45
+##  3:          4.6         3.2          1.4         0.2  setosa         45
+##  4:          4.8         3.0          1.4         0.1  setosa         45
+##  5:          4.8         3.0          1.4         0.3  setosa         45
+##  6:          4.9         3.0          1.4         0.2  setosa         45
+##  7:          4.9         3.6          1.4         0.1  setosa         45
+##  8:          5.0         3.6          1.4         0.2  setosa         45
+##  9:          5.0         3.3          1.4         0.2  setosa         45
+## 10:          5.1         3.5          1.4         0.2  setosa         45
+## 11:          5.1         3.5          1.4         0.3  setosa         45
+## 12:          5.2         3.4          1.4         0.2  setosa         45
+## 13:          5.5         4.2          1.4         0.2  setosa         45
+##     Petal.Area
+##  1:       0.28
+##  2:       0.42
+##  3:       0.28
+##  4:       0.14
+##  5:       0.42
+##  6:       0.28
+##  7:       0.14
+##  8:       0.28
+##  9:       0.28
+## 10:       0.28
+## 11:       0.42
+## 12:       0.28
+## 13:       0.28</code></pre>
+<p>One can also use functions to update the specific values</p>
+<pre class="r"><code>DataDfI[Species == &quot;setosa&quot; &amp; Petal.Length == 1.4,Sepal.Area:=(Sepal.Length/Sepal.Width),]
+DataDfI[Species == &quot;setosa&quot; &amp; Petal.Length == 1.4,,]</code></pre>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal.Area
+##  1:          4.4         2.9          1.4         0.2  setosa   1.517241
+##  2:          4.6         3.4          1.4         0.3  setosa   1.352941
+##  3:          4.6         3.2          1.4         0.2  setosa   1.437500
+##  4:          4.8         3.0          1.4         0.1  setosa   1.600000
+##  5:          4.8         3.0          1.4         0.3  setosa   1.600000
+##  6:          4.9         3.0          1.4         0.2  setosa   1.633333
+##  7:          4.9         3.6          1.4         0.1  setosa   1.361111
+##  8:          5.0         3.6          1.4         0.2  setosa   1.388889
+##  9:          5.0         3.3          1.4         0.2  setosa   1.515152
+## 10:          5.1         3.5          1.4         0.2  setosa   1.457143
+## 11:          5.1         3.5          1.4         0.3  setosa   1.457143
+## 12:          5.2         3.4          1.4         0.2  setosa   1.529412
+## 13:          5.5         4.2          1.4         0.2  setosa   1.309524
+##     Petal.Area
+##  1:       0.28
+##  2:       0.42
+##  3:       0.28
+##  4:       0.14
+##  5:       0.42
+##  6:       0.28
+##  7:       0.14
+##  8:       0.28
+##  9:       0.28
+## 10:       0.28
+## 11:       0.42
+## 12:       0.28
+## 13:       0.28</code></pre>
+</div>
+<div id="deleting-columns-using-null" class="section level2">
+<h2>Deleting columns using := NULL</h2>
+<p>To delete columns in data.table, one can use <strong>:= NULL</strong> syntax. Let’s see an example</p>
+<pre class="r"><code>DataDfI[,Sepal.Area:=NULL,]
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          4.3         3.0          1.1         0.1    setosa
+##   2:          4.4         2.9          1.4         0.2    setosa
+##   3:          4.4         3.0          1.3         0.2    setosa
+##   4:          4.4         3.2          1.3         0.2    setosa
+##   5:          4.5         2.3          1.3         0.3    setosa
+##  ---                                                            
+## 146:          7.7         2.6          6.9         2.3 virginica
+## 147:          7.7         3.8          6.7         2.2 virginica
+## 148:          7.7         2.8          6.7         2.0 virginica
+## 149:          7.7         3.0          6.1         2.3 virginica
+## 150:          7.9         3.8          6.4         2.0 virginica
+##      Petal.Area
+##   1:       0.11
+##   2:       0.28
+##   3:       0.26
+##   4:       0.26
+##   5:       0.39
+##  ---           
+## 146:      15.87
+## 147:      14.74
+## 148:      13.40
+## 149:      14.03
+## 150:      12.80</code></pre>
+<p>We can delete multiple columns as well, but the column names should be given as a vector</p>
+<pre class="r"><code>DataDfI[,Sepal.Area:=(Sepal.Length*Sepal.Width),]
+DataDfI[,c(&quot;Sepal.Area&quot;,&quot;Petal.Area&quot;):=NULL,]
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          4.3         3.0          1.1         0.1    setosa
+##   2:          4.4         2.9          1.4         0.2    setosa
+##   3:          4.4         3.0          1.3         0.2    setosa
+##   4:          4.4         3.2          1.3         0.2    setosa
+##   5:          4.5         2.3          1.3         0.3    setosa
+##  ---                                                            
+## 146:          7.7         2.6          6.9         2.3 virginica
+## 147:          7.7         3.8          6.7         2.2 virginica
+## 148:          7.7         2.8          6.7         2.0 virginica
+## 149:          7.7         3.0          6.1         2.3 virginica
+## 150:          7.9         3.8          6.4         2.0 virginica</code></pre>
+</div>
+<div id="removing-duplicates-using-duplicated" class="section level2">
+<h2>Removing duplicates using duplicated</h2>
+<p>We can use <strong>duplicated</strong> syntax for removing duplicates from the data.table</p>
+<pre class="r"><code>DataDfI &lt;- rbind(DataDfI, DataDfI)
+nrow(DataDfI)</code></pre>
+<pre><code>## [1] 300</code></pre>
+<pre class="r"><code>DataDfI &lt;- DataDfI[!duplicated(DataDfI),,]
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          4.3         3.0          1.1         0.1    setosa
+##   2:          4.4         2.9          1.4         0.2    setosa
+##   3:          4.4         3.0          1.3         0.2    setosa
+##   4:          4.4         3.2          1.3         0.2    setosa
+##   5:          4.5         2.3          1.3         0.3    setosa
+##  ---                                                            
+## 145:          7.7         2.6          6.9         2.3 virginica
+## 146:          7.7         3.8          6.7         2.2 virginica
+## 147:          7.7         2.8          6.7         2.0 virginica
+## 148:          7.7         3.0          6.1         2.3 virginica
+## 149:          7.9         3.8          6.4         2.0 virginica</code></pre>
+</div>
+<div id="aggregate-the-data-using-list-and-bylist" class="section level2">
+<h2>Aggregate the data using list() and by=list()</h2>
+<p>Aggregating data is easy to execute in data.table. To aggregate the data, we follow two steps:</p>
+<ul>
+<li>Step 1: Define aggregation methods in second argument of data.table and enclose them in list()</li>
+<li>Step 2: Define the aggregation level and pass it as a third argument in data.table and enclose in by = list()</li>
+</ul>
+<p>Lets see what is the average Petal.Length in for each Species</p>
+<pre class="r"><code>DataDfI[,list(AvgPetalLength = mean(Petal.Length)),by=list(Species)]</code></pre>
+<pre><code>##       Species AvgPetalLength
+## 1:     setosa       1.462000
+## 2:  virginica       5.561224
+## 3: versicolor       4.260000</code></pre>
+<p>When aggregating multiple columns one should separate them by commas</p>
+<p>Lets see what is the average Petal.Length and Petal.Width in for each Species colnames(DataDfI)</p>
+<pre class="r"><code>DataDfI[,list(AvgPetalLength = mean(Petal.Length),
+              AvgPetalWidth = mean(Petal.Width)),
+        by=list(Species)]</code></pre>
+<pre><code>##       Species AvgPetalLength AvgPetalWidth
+## 1:     setosa       1.462000      0.246000
+## 2:  virginica       5.561224      2.028571
+## 3: versicolor       4.260000      1.326000</code></pre>
+<p>Instead of mean, one can also use functions like median(), sum() etc.</p>
+<p>To get count of the rows, one should use <strong>.N</strong></p>
+<pre class="r"><code>DataDfI[,list(Count = .N),by=list(Species)]</code></pre>
+<pre><code>##       Species Count
+## 1:     setosa    50
+## 2:  virginica    49
+## 3: versicolor    50</code></pre>
+<p>One can also get the count of uniques for each columns. To obtain this we have to use <strong>length(unique(Columnname))</strong></p>
+<pre class="r"><code>DataDfI[,list(UniquesPetalLength = length(unique(Petal.Length)),
+              UniquesPetalWidth = length(unique(Petal.Width))),by=list(Species)]</code></pre>
+<pre><code>##       Species UniquesPetalLength UniquesPetalWidth
+## 1:     setosa                  9                 6
+## 2:  virginica                 20                12
+## 3: versicolor                 19                 9</code></pre>
+<p>Note: Make sure that you get only one value after aggregation for each row. If you return multiple values for aggregation, the function will throw an error</p>
+</div>
+<div id="imputing-missing-values-using-and-set" class="section level2">
+<h2>Imputing missing values using := and set</h2>
+<p>Column wise imputation can done as follows</p>
+<pre class="r"><code>DataDfI[is.na(Petal.Length),Petal.Length:=0,]
+DataDfI[is.na(Petal.Width),Petal.Length:=0,]</code></pre>
+<p>One can also impute the values in the whole data.table at once as well. We use the <strong>set</strong> syntax</p>
+<pre class="r"><code>for(j in names(DataDfI))
+  set(DataDfI,which(is.na(DataDfI)),j,0)</code></pre>
+</div>
+<div id="applying-functions-across-the-rows-using-by1nrow-and-.sdcols" class="section level2">
+<h2>Applying functions across the rows using by=1:nrow() and .SDcols</h2>
+<p>When applying functions which deal with more than 3 columns and when using other complex functions, one has to use an additional <strong>by=1:nrow(datatablename)</strong> argument</p>
+<pre class="r"><code>DataDfI[,Species:=as.character(Species),]
+DataDfI[,SpeciesLength := nchar(Species),by=1:nrow(DataDfI)]</code></pre>
+<p>While applying functions only on a subet of columns, use <strong>.SDcols</strong> syntax</p>
+<pre class="r"><code>DataDfI[,Sums:=rowSums(.SD, na.rm = T),.SDcols = c(&quot;Petal.Length&quot;,&quot;Petal.Width&quot;)]
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          4.3         3.0          1.1         0.1    setosa
+##   2:          4.4         2.9          1.4         0.2    setosa
+##   3:          4.4         3.0          1.3         0.2    setosa
+##   4:          4.4         3.2          1.3         0.2    setosa
+##   5:          4.5         2.3          1.3         0.3    setosa
+##  ---                                                            
+## 145:          7.7         2.6          6.9         2.3 virginica
+## 146:          7.7         3.8          6.7         2.2 virginica
+## 147:          7.7         2.8          6.7         2.0 virginica
+## 148:          7.7         3.0          6.1         2.3 virginica
+## 149:          7.9         3.8          6.4         2.0 virginica
+##      SpeciesLength Sums
+##   1:             6  1.2
+##   2:             6  1.6
+##   3:             6  1.5
+##   4:             6  1.5
+##   5:             6  1.6
+##  ---                   
+## 145:             9  9.2
+## 146:             9  8.9
+## 147:             9  8.7
+## 148:             9  8.4
+## 149:             9  8.4</code></pre>
+</div>
+<div id="summarizing" class="section level2">
+<h2>Summarizing</h2>
+<p>We did the following in data.table so far:</p>
+<ul>
+<li>Created a data.table using <strong>fread, data.table() and as.data.table</strong></li>
+<li>Understood the two comma notation of data.table</li>
+<li>Subsetted the data on rows, columns and both</li>
+<li>Created a new column in data.table using <strong>:=</strong></li>
+<li>Sorted a data.table using <strong>setorder</strong></li>
+<li>Updated values using <strong>:=</strong></li>
+<li>Deleted columns using <strong>:=NULL</strong></li>
+<li>Removed duplicates using <strong>duplicated</strong></li>
+<li>Aggregated the data using <strong>list() and by=list()</strong></li>
+<li>Imputed missing values using <strong>:=</strong> and <strong>set</strong></li>
+<li>Applied functions across the rows using <strong>by=1:nrow()</strong> and <strong>.SDcols</strong></li>
+</ul>
+</div>
+<div id="time-to-forget-data.frame-because-data.table" class="section level2">
+<h2>Time to forget data.frame because data.table…</h2>
+<ul>
+<li>Can process large datasets with <strong>Ease</strong></li>
+<li>Can execute data manipulations atleast <strong>1.5 times Faster</strong></li>
+<li>Has <strong>Shorter</strong> syntaxes: Did you observe any code which was more than a line ;)</li>
+<li>Has <strong>Better</strong> summary representation: Bye bye head() and tail()</li>
+</ul>
+<p><strong>Note:</strong> Have a good day and keep data.tabling :D</p>
+</div>
+
+
+                <br>
+            </div>
+            
+            
+                <div class="navigation">
+                    
+                    <div>
+                        <img class="icon" src="/img/back.svg" alt="back" />
+                        <a href="/blog/karnataka-election-projections/">Karnataka Election Projections</a>
+                    </div>
+                    
+                    <div style="width: 100%;"></div>
+                    
+                </div>
+            
+            <br>
+            <div class="disqus">
+                
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="footer column">
+    <div class="container">
+
+        
+
+        <div class="copyright">
+
+        
+            
+                <a href="/license">Copyright © 2018 Kiran Ganji</a>
+            
+        
+
+        </div>
+        <div class="icons">
+
+        
+
+        
+            <a href="https://github.com/kiranganji" target="_blank">
+                <img class="icon" src="/img/github.svg" alt="github" />
+            </a>
+        
+
+        
+            <a href="https://twitter.com/GanjiKiran9" target="_blank">
+                <img class="icon" src="/img/twitter.svg" alt="twitter" />
+            </a>
+        
+
+        
+            <a href="https://www.linkedin.com/in/ganjikiran" target="_blank">
+                <img class="icon" src="/img/linkedin.svg" alt="linkedin" />
+            </a>
+        
+
+        
+
+        
+            <a href="/index.xml">
+                <img class="icon" src="/img/rss.svg" alt="rss" />
+            </a>
+        
+
+        </div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    google: {
+      families: ['Raleway:400,600,700', 'Merriweather:300,300i,700,700i', 'Ubuntu+Mono:400,700']
+    }
+  });
+</script>
+
+
+
+  <script src="/js/highlight.min.js" defer></script>
+  
+
+
+
+  <script src="/js/progressively.min.js" defer></script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.onload = function() {
+    
+      hljs.initHighlighting();
+    
+    
+      progressively.init({delay: 30, throttle: 50});
+    
+    
+  };
+</script>
+
+
+
+
+</body>
+</html>
+

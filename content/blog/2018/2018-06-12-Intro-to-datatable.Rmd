@@ -1,0 +1,354 @@
+---
+title: "Getting started with data.table"
+author: "Kiran Ganji"
+date: 2018-06-15
+categories: ["Getting Started"]
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## data.table outperforms data.frame in atleast 4 different areas
+
+
+The following are few reasons why one should prefer data.table instead of data.frame
+
+- **Easier** to process large datasets
+- **Faster** data manipulations
+- **Shorter** syntaxes
+- **Better** summary representation
+
+## After this presentation, you won't need data.frame because we are going to...
+
+- Create a data.table using **fread, data.table() and as.data.table**
+- Understand the two comma notation of data.table
+- Subset the data on rows, columns and both
+- Create a new column in data.table using **:=**
+- Sort a data.table using **setorder**
+- Update values using **:=**
+- Delete columns using **:=NULL**
+- Remove duplicates using **duplicated**
+- Aggregate the data using **list() and by=list()**
+- Impute missing values using **:=** and **set**
+- Apply functions across the rows using **by=1:nrow()** and **.SDcols**
+
+
+## I am going to use iris data for demonstration. What a cliche right ;)
+
+We will be using the pre-built dataset, **iris**, to get familiar with various syntaxes of data.table. Lets begin by loading the datasets in R
+
+```{r, echo = TRUE}
+library(data.table)
+
+data(iris)
+DataDfI <- data.table(iris)
+```
+
+The above code just loads the dataset into R enivronment. I will be using the variable **DataDfI** from here on in the presentation to indicate iris data
+
+## Creating a data.table using fread(), data.table() and as.data.table
+
+You can create a data.table from vectors, matrices and csv files. Let's take a look at how this can be achieved
+
+```{r, echo=TRUE}
+
+#Using data.table() function - For data frames and vectors
+DataDf <- data.table(iris) #Assume iris is a dataframe
+write.csv(DataDf,"Data/iris.csv")
+
+#Using data.table() function - For vectors
+ids <- letters 
+values <- seq(1,26,1)
+DataDf <- data.table(Column = ids, Value = values)
+
+#Using as.data.table() - For matrices
+DataDf <- as.data.table(as.matrix(iris))
+
+#Using fread - For csv files
+DataDf <- fread("Data/iris.csv")
+
+```
+
+
+## Understanding the two comma notation of data.table
+
+Unlike data.frame, data.table can take 3 arguments. Lets understand them:
+
+```{r, echo=TRUE}
+# DataDf[i,j,k]
+```
+
+i - row selection
+j - column selection
+k - aggregation paramters
+
+
+**Note:** Unlike data.frame, data.table does not require column names to be given in quotes
+
+```{r, echo=TRUE}
+DataDfI[Sepal.Length > 5,,]#Select one row
+```
+
+
+## Subsetting the data on rows
+
+Filter conditions on rows can be supplied as the first arguement of the data.table
+
+Subset rows using one condition
+```{r, echo=TRUE}
+DataDfI[Sepal.Length > 5,,]
+```
+
+Subset rows using two condition
+```{r, echo=TRUE}
+DataDfI[Sepal.Length > 5 & Sepal.Width > 3.2,,]
+```
+
+Subset rows greater than mean
+```{r, echo=TRUE}
+DataDfI[Sepal.Length > mean(Sepal.Length) ,,]
+```
+
+## Subsetting the data on columns
+
+One can select a column in data.table by passing the column name as second argument. The result in doing so will be a vector
+
+```{r, echo=TRUE}
+# Select rows with greater than mean
+DataDfI[,Sepal.Length,]
+```
+
+To retain the data.table structure, the columns should be provided in quotes
+
+```{r, echo=TRUE}
+# Select rows with greater than mean
+DataDfI[,"Sepal.Length",]
+```
+
+To retain data.table structure, multiple columns should be provided as vectors
+
+```{r, echo=TRUE}
+# Select rows with greater than mean
+DataDfI[,c("Sepal.Length","Sepal.Length"),]
+```
+
+## Subsetting based on rows and columns
+
+```{r, echo=TRUE}
+# Subsetting rows and columns
+DataDfI[Sepal.Length > mean(Sepal.Length),c("Sepal.Length","Sepal.Length"),]
+```
+
+## Creating a new column in data.table using **:=**
+
+To generate new columns, we use **:=** syntax. Example shown below.
+
+```{r, echo=TRUE}
+DataDfI[,Sepal.Area := Sepal.Length * Sepal.Width,]
+DataDfI
+```
+
+**Note:** The column creation should be done as part of second argument
+
+One can create multiple columns at one stretch
+
+```{r, echo=TRUE}
+DataDfI[,`:=`(Sepal.Area = Sepal.Length * Sepal.Width,
+              Petal.Area = Petal.Length * Petal.Width),]
+DataDfI
+```
+
+**Note:** Do not forget to enclose the **:=** by **`**
+
+## Sorting a data.table using **setorder**
+
+We can use **setorder** synatax for sorting a data table. Example shown below
+
+```{r, echo=TRUE}
+# Sort based on the descending order of Petal length
+setorder(DataDfI,-Petal.Length)
+DataDfI
+```
+
+```{r, echo=TRUE}
+# Sort based on the ascending order of Sepal length
+setorder(DataDfI,Sepal.Length)
+DataDfI
+```
+
+One can sort based on two columns as well
+
+```{r, echo=TRUE}
+# Sort based on the ascending order of Sepal length and then descending order of species
+setorder(DataDfI,Sepal.Length,-Species)
+DataDfI
+```
+
+
+## Updating values using :=
+
+To update values in data.table, one can use **:=** operator. Let's see an example
+
+```{r, echo=TRUE}
+DataDfI[Species == "setosa" & Petal.Length == 1.4,Sepal.Area:=45,]
+DataDfI[Species == "setosa" & Petal.Length == 1.4,,]
+```
+
+One can also use functions to update the specific values
+
+```{r, echo=TRUE}
+DataDfI[Species == "setosa" & Petal.Length == 1.4,Sepal.Area:=(Sepal.Length/Sepal.Width),]
+DataDfI[Species == "setosa" & Petal.Length == 1.4,,]
+```
+
+## Deleting columns using := NULL
+
+To delete columns in data.table, one can use **:= NULL** syntax. Let's see an example
+
+```{r, echo=TRUE}
+DataDfI[,Sepal.Area:=NULL,]
+DataDfI
+```
+
+We can delete multiple columns as well, but the column names should be given as a vector
+
+```{r, echo=TRUE}
+DataDfI[,Sepal.Area:=(Sepal.Length*Sepal.Width),]
+DataDfI[,c("Sepal.Area","Petal.Area"):=NULL,]
+DataDfI
+```
+
+## Removing duplicates using duplicated
+
+
+We can use **duplicated** syntax for removing duplicates from the data.table
+
+```{r, echo=TRUE}
+DataDfI <- rbind(DataDfI, DataDfI)
+nrow(DataDfI)
+```
+
+
+```{r, echo=TRUE}
+DataDfI <- DataDfI[!duplicated(DataDfI),,]
+DataDfI
+```
+
+
+## Aggregate the data using list() and by=list()
+
+Aggregating data is easy to execute in data.table. To aggregate the data, we follow two steps:
+
+- Step 1: Define aggregation methods in second argument of data.table and enclose them in list()
+- Step 2: Define the aggregation level and pass it as a third argument in data.table and enclose in by = list()
+
+
+Lets see what is the average Petal.Length in for each Species
+
+```{r, echo=TRUE}
+DataDfI[,list(AvgPetalLength = mean(Petal.Length)),by=list(Species)]
+```
+
+When aggregating multiple columns one should separate them by commas
+
+Lets see what is the average Petal.Length and Petal.Width in for each Species
+colnames(DataDfI)
+```{r, echo=TRUE}
+DataDfI[,list(AvgPetalLength = mean(Petal.Length),
+              AvgPetalWidth = mean(Petal.Width)),
+        by=list(Species)]
+```
+Instead of mean, one can also use functions like median(), sum() etc.
+
+To get count of the rows, one should use **.N**
+
+```{r, echo=TRUE}
+DataDfI[,list(Count = .N),by=list(Species)]
+```
+
+One can also get the count of uniques for each columns. To obtain this we have to use **length(unique(Columnname))**
+
+```{r, echo=TRUE}
+DataDfI[,list(UniquesPetalLength = length(unique(Petal.Length)),
+              UniquesPetalWidth = length(unique(Petal.Width))),by=list(Species)]
+```
+
+Note: Make sure that you get only one value after aggregation for each row. If you return multiple values for aggregation, the function will throw an error
+
+## Imputing missing values using := and set
+
+Column wise imputation can done as follows
+
+```{r, echo=TRUE}
+DataDfI[is.na(Petal.Length),Petal.Length:=0,]
+DataDfI[is.na(Petal.Width),Petal.Length:=0,]
+```
+
+One can also impute the values in the whole data.table at once as well. We use the **set** syntax
+
+```{r, echo=TRUE}
+for(j in names(DataDfI))
+  set(DataDfI,which(is.na(DataDfI)),j,0)
+```
+
+
+
+## Applying functions across the rows using by=1:nrow() and .SDcols
+
+When applying functions which deal with more than 3 columns and when using other complex functions, one has to use an additional **by=1:nrow(datatablename)** argument
+
+```{r, echo=TRUE}
+DataDfI[,Species:=as.character(Species),]
+DataDfI[,SpeciesLength := nchar(Species),by=1:nrow(DataDfI)]
+```
+
+
+While applying functions only on a subet of columns, use **.SDcols** syntax
+
+```{r, echo=TRUE}
+DataDfI[,Sums:=rowSums(.SD, na.rm = T),.SDcols = c("Petal.Length","Petal.Width")]
+DataDfI
+```
+
+## Summarizing
+
+We did the following in data.table so far:
+
+- Created a data.table using **fread, data.table() and as.data.table**
+- Understood the two comma notation of data.table
+- Subsetted the data on rows, columns and both
+- Created a new column in data.table using **:=**
+- Sorted a data.table using **setorder**
+- Updated values using **:=**
+- Deleted columns using **:=NULL**
+- Removed duplicates using **duplicated**
+- Aggregated the data using **list() and by=list()**
+- Imputed missing values using **:=** and **set**
+- Applied functions across the rows using **by=1:nrow()** and **.SDcols**
+
+## Time to forget data.frame because data.table...
+
+- Can process large datasets with **Ease**
+- Can execute data manipulations atleast **1.5 times Faster**
+- Has **Shorter** syntaxes: Did you observe any code which was more than a line ;)
+- Has **Better** summary representation: Bye bye head() and tail()
+
+**Note:** Have a good day and keep data.tabling :D
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,717 @@
+---
+title: "Getting started with data.table"
+author: "Kiran Ganji"
+date: 2018-06-12
+categories: ["Getting Started"]
+---
+
+
+
+<div id="data.table-outperforms-data.frame-in-atleast-4-different-areas" class="section level2">
+<h2>data.table outperforms data.frame in atleast 4 different areas</h2>
+<p>The following are few reasons why one should prefer data.table instead of data.frame</p>
+<ul>
+<li><strong>Easier</strong> to process large datasets</li>
+<li><strong>Faster</strong> data manipulations</li>
+<li><strong>Shorter</strong> syntaxes</li>
+<li><strong>Better</strong> summary representation</li>
+</ul>
+</div>
+<div id="after-this-presentation-you-wont-need-data.frame-because-we-are-going-to" class="section level2">
+<h2>After this presentation, you won’t need data.frame because we are going to…</h2>
+<ul>
+<li>Create a data.table using <strong>fread, data.table() and as.data.table</strong></li>
+<li>Understand the two comma notation of data.table</li>
+<li>Subset the data on rows, columns and both</li>
+<li>Create a new column in data.table using <strong>:=</strong></li>
+<li>Sort a data.table using <strong>setorder</strong></li>
+<li>Update values using <strong>:=</strong></li>
+<li>Delete columns using <strong>:=NULL</strong></li>
+<li>Remove duplicates using <strong>duplicated</strong></li>
+<li>Aggregate the data using <strong>list() and by=list()</strong></li>
+<li>Impute missing values using <strong>:=</strong> and <strong>set</strong></li>
+<li>Apply functions across the rows using <strong>by=1:nrow()</strong> and <strong>.SDcols</strong></li>
+</ul>
+</div>
+<div id="i-am-going-to-use-iris-data-for-demonstration.-what-a-cliche-right" class="section level2">
+<h2>I am going to use iris data for demonstration. What a cliche right ;)</h2>
+<p>We will be using the pre-built dataset, <strong>iris</strong>, to get familiar with various syntaxes of data.table. Lets begin by loading the datasets in R</p>
+<pre class="r"><code>library(data.table)
+
+data(iris)
+DataDfI &lt;- data.table(iris)</code></pre>
+<p>The above code just loads the dataset into R enivronment. I will be using the variable <strong>DataDfI</strong> from here on in the presentation to indicate iris data</p>
+</div>
+<div id="creating-a-data.table-using-fread-data.table-and-as.data.table" class="section level2">
+<h2>Creating a data.table using fread(), data.table() and as.data.table</h2>
+<p>You can create a data.table from vectors, matrices and csv files. Let’s take a look at how this can be achieved</p>
+<pre class="r"><code>#Using data.table() function - For data frames and vectors
+DataDf &lt;- data.table(iris) #Assume iris is a dataframe
+write.csv(DataDf,&quot;Data/iris.csv&quot;)
+
+#Using data.table() function - For vectors
+ids &lt;- letters 
+values &lt;- seq(1,26,1)
+DataDf &lt;- data.table(Column = ids, Value = values)
+
+#Using as.data.table() - For matrices
+DataDf &lt;- as.data.table(as.matrix(iris))
+
+#Using fread - For csv files
+DataDf &lt;- fread(&quot;Data/iris.csv&quot;)</code></pre>
+</div>
+<div id="understanding-the-two-comma-notation-of-data.table" class="section level2">
+<h2>Understanding the two comma notation of data.table</h2>
+<p>Unlike data.frame, data.table can take 3 arguments. Lets understand them:</p>
+<pre class="r"><code># DataDf[i,j,k]</code></pre>
+<p>i - row selection j - column selection k - aggregation paramters</p>
+<p><strong>Note:</strong> Unlike data.frame, data.table does not require column names to be given in quotes</p>
+<pre class="r"><code>DataDfI[Sepal.Length &gt; 5,,]#Select one row</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          5.1         3.5          1.4         0.2    setosa
+##   2:          5.4         3.9          1.7         0.4    setosa
+##   3:          5.4         3.7          1.5         0.2    setosa
+##   4:          5.8         4.0          1.2         0.2    setosa
+##   5:          5.7         4.4          1.5         0.4    setosa
+##  ---                                                            
+## 114:          6.7         3.0          5.2         2.3 virginica
+## 115:          6.3         2.5          5.0         1.9 virginica
+## 116:          6.5         3.0          5.2         2.0 virginica
+## 117:          6.2         3.4          5.4         2.3 virginica
+## 118:          5.9         3.0          5.1         1.8 virginica</code></pre>
+</div>
+<div id="subsetting-the-data-on-rows" class="section level2">
+<h2>Subsetting the data on rows</h2>
+<p>Filter conditions on rows can be supplied as the first arguement of the data.table</p>
+<p>Subset rows using one condition</p>
+<pre class="r"><code>DataDfI[Sepal.Length &gt; 5,,]</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          5.1         3.5          1.4         0.2    setosa
+##   2:          5.4         3.9          1.7         0.4    setosa
+##   3:          5.4         3.7          1.5         0.2    setosa
+##   4:          5.8         4.0          1.2         0.2    setosa
+##   5:          5.7         4.4          1.5         0.4    setosa
+##  ---                                                            
+## 114:          6.7         3.0          5.2         2.3 virginica
+## 115:          6.3         2.5          5.0         1.9 virginica
+## 116:          6.5         3.0          5.2         2.0 virginica
+## 117:          6.2         3.4          5.4         2.3 virginica
+## 118:          5.9         3.0          5.1         1.8 virginica</code></pre>
+<p>Subset rows using two condition</p>
+<pre class="r"><code>DataDfI[Sepal.Length &gt; 5 &amp; Sepal.Width &gt; 3.2,,]</code></pre>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+##  1:          5.1         3.5          1.4         0.2     setosa
+##  2:          5.4         3.9          1.7         0.4     setosa
+##  3:          5.4         3.7          1.5         0.2     setosa
+##  4:          5.8         4.0          1.2         0.2     setosa
+##  5:          5.7         4.4          1.5         0.4     setosa
+##  6:          5.4         3.9          1.3         0.4     setosa
+##  7:          5.1         3.5          1.4         0.3     setosa
+##  8:          5.7         3.8          1.7         0.3     setosa
+##  9:          5.1         3.8          1.5         0.3     setosa
+## 10:          5.4         3.4          1.7         0.2     setosa
+## 11:          5.1         3.7          1.5         0.4     setosa
+## 12:          5.1         3.3          1.7         0.5     setosa
+## 13:          5.2         3.5          1.5         0.2     setosa
+## 14:          5.2         3.4          1.4         0.2     setosa
+## 15:          5.4         3.4          1.5         0.4     setosa
+## 16:          5.2         4.1          1.5         0.1     setosa
+## 17:          5.5         4.2          1.4         0.2     setosa
+## 18:          5.5         3.5          1.3         0.2     setosa
+## 19:          5.1         3.4          1.5         0.2     setosa
+## 20:          5.1         3.8          1.9         0.4     setosa
+## 21:          5.1         3.8          1.6         0.2     setosa
+## 22:          5.3         3.7          1.5         0.2     setosa
+## 23:          6.3         3.3          4.7         1.6 versicolor
+## 24:          6.0         3.4          4.5         1.6 versicolor
+## 25:          6.3         3.3          6.0         2.5  virginica
+## 26:          7.2         3.6          6.1         2.5  virginica
+## 27:          7.7         3.8          6.7         2.2  virginica
+## 28:          6.7         3.3          5.7         2.1  virginica
+## 29:          7.9         3.8          6.4         2.0  virginica
+## 30:          6.3         3.4          5.6         2.4  virginica
+## 31:          6.7         3.3          5.7         2.5  virginica
+## 32:          6.2         3.4          5.4         2.3  virginica
+##     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species</code></pre>
+<p>Subset rows greater than mean</p>
+<pre class="r"><code>DataDfI[Sepal.Length &gt; mean(Sepal.Length) ,,]</code></pre>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+##  1:          7.0         3.2          4.7         1.4 versicolor
+##  2:          6.4         3.2          4.5         1.5 versicolor
+##  3:          6.9         3.1          4.9         1.5 versicolor
+##  4:          6.5         2.8          4.6         1.5 versicolor
+##  5:          6.3         3.3          4.7         1.6 versicolor
+##  6:          6.6         2.9          4.6         1.3 versicolor
+##  7:          5.9         3.0          4.2         1.5 versicolor
+##  8:          6.0         2.2          4.0         1.0 versicolor
+##  9:          6.1         2.9          4.7         1.4 versicolor
+## 10:          6.7         3.1          4.4         1.4 versicolor
+## 11:          6.2         2.2          4.5         1.5 versicolor
+## 12:          5.9         3.2          4.8         1.8 versicolor
+## 13:          6.1         2.8          4.0         1.3 versicolor
+## 14:          6.3         2.5          4.9         1.5 versicolor
+## 15:          6.1         2.8          4.7         1.2 versicolor
+## 16:          6.4         2.9          4.3         1.3 versicolor
+## 17:          6.6         3.0          4.4         1.4 versicolor
+## 18:          6.8         2.8          4.8         1.4 versicolor
+## 19:          6.7         3.0          5.0         1.7 versicolor
+## 20:          6.0         2.9          4.5         1.5 versicolor
+## 21:          6.0         2.7          5.1         1.6 versicolor
+## 22:          6.0         3.4          4.5         1.6 versicolor
+## 23:          6.7         3.1          4.7         1.5 versicolor
+## 24:          6.3         2.3          4.4         1.3 versicolor
+## 25:          6.1         3.0          4.6         1.4 versicolor
+## 26:          6.2         2.9          4.3         1.3 versicolor
+## 27:          6.3         3.3          6.0         2.5  virginica
+## 28:          7.1         3.0          5.9         2.1  virginica
+## 29:          6.3         2.9          5.6         1.8  virginica
+## 30:          6.5         3.0          5.8         2.2  virginica
+## 31:          7.6         3.0          6.6         2.1  virginica
+## 32:          7.3         2.9          6.3         1.8  virginica
+## 33:          6.7         2.5          5.8         1.8  virginica
+## 34:          7.2         3.6          6.1         2.5  virginica
+## 35:          6.5         3.2          5.1         2.0  virginica
+## 36:          6.4         2.7          5.3         1.9  virginica
+## 37:          6.8         3.0          5.5         2.1  virginica
+## 38:          6.4         3.2          5.3         2.3  virginica
+## 39:          6.5         3.0          5.5         1.8  virginica
+## 40:          7.7         3.8          6.7         2.2  virginica
+## 41:          7.7         2.6          6.9         2.3  virginica
+## 42:          6.0         2.2          5.0         1.5  virginica
+## 43:          6.9         3.2          5.7         2.3  virginica
+## 44:          7.7         2.8          6.7         2.0  virginica
+## 45:          6.3         2.7          4.9         1.8  virginica
+## 46:          6.7         3.3          5.7         2.1  virginica
+## 47:          7.2         3.2          6.0         1.8  virginica
+## 48:          6.2         2.8          4.8         1.8  virginica
+## 49:          6.1         3.0          4.9         1.8  virginica
+## 50:          6.4         2.8          5.6         2.1  virginica
+## 51:          7.2         3.0          5.8         1.6  virginica
+## 52:          7.4         2.8          6.1         1.9  virginica
+## 53:          7.9         3.8          6.4         2.0  virginica
+## 54:          6.4         2.8          5.6         2.2  virginica
+## 55:          6.3         2.8          5.1         1.5  virginica
+## 56:          6.1         2.6          5.6         1.4  virginica
+## 57:          7.7         3.0          6.1         2.3  virginica
+## 58:          6.3         3.4          5.6         2.4  virginica
+## 59:          6.4         3.1          5.5         1.8  virginica
+## 60:          6.0         3.0          4.8         1.8  virginica
+## 61:          6.9         3.1          5.4         2.1  virginica
+## 62:          6.7         3.1          5.6         2.4  virginica
+## 63:          6.9         3.1          5.1         2.3  virginica
+## 64:          6.8         3.2          5.9         2.3  virginica
+## 65:          6.7         3.3          5.7         2.5  virginica
+## 66:          6.7         3.0          5.2         2.3  virginica
+## 67:          6.3         2.5          5.0         1.9  virginica
+## 68:          6.5         3.0          5.2         2.0  virginica
+## 69:          6.2         3.4          5.4         2.3  virginica
+## 70:          5.9         3.0          5.1         1.8  virginica
+##     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species</code></pre>
+</div>
+<div id="subsetting-the-data-on-columns" class="section level2">
+<h2>Subsetting the data on columns</h2>
+<p>One can select a column in data.table by passing the column name as second argument. The result in doing so will be a vector</p>
+<pre class="r"><code># Select rows with greater than mean
+DataDfI[,Sepal.Length,]</code></pre>
+<pre><code>##   [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4
+##  [18] 5.1 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4 5.2 5.5
+##  [35] 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4.8 5.1 4.6 5.3 5.0 7.0
+##  [52] 6.4 6.9 5.5 6.5 5.7 6.3 4.9 6.6 5.2 5.0 5.9 6.0 6.1 5.6 6.7 5.6 5.8
+##  [69] 6.2 5.6 5.9 6.1 6.3 6.1 6.4 6.6 6.8 6.7 6.0 5.7 5.5 5.5 5.8 6.0 5.4
+##  [86] 6.0 6.7 6.3 5.6 5.5 5.5 6.1 5.8 5.0 5.6 5.7 5.7 6.2 5.1 5.7 6.3 5.8
+## [103] 7.1 6.3 6.5 7.6 4.9 7.3 6.7 7.2 6.5 6.4 6.8 5.7 5.8 6.4 6.5 7.7 7.7
+## [120] 6.0 6.9 5.6 7.7 6.3 6.7 7.2 6.2 6.1 6.4 7.2 7.4 7.9 6.4 6.3 6.1 7.7
+## [137] 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8 6.7 6.7 6.3 6.5 6.2 5.9</code></pre>
+<p>To retain the data.table structure, the columns should be provided in quotes</p>
+<pre class="r"><code># Select rows with greater than mean
+DataDfI[,&quot;Sepal.Length&quot;,]</code></pre>
+<pre><code>##      Sepal.Length
+##   1:          5.1
+##   2:          4.9
+##   3:          4.7
+##   4:          4.6
+##   5:          5.0
+##  ---             
+## 146:          6.7
+## 147:          6.3
+## 148:          6.5
+## 149:          6.2
+## 150:          5.9</code></pre>
+<p>To retain data.table structure, multiple columns should be provided as vectors</p>
+<pre class="r"><code># Select rows with greater than mean
+DataDfI[,c(&quot;Sepal.Length&quot;,&quot;Sepal.Length&quot;),]</code></pre>
+<pre><code>##      Sepal.Length Sepal.Length
+##   1:          5.1          5.1
+##   2:          4.9          4.9
+##   3:          4.7          4.7
+##   4:          4.6          4.6
+##   5:          5.0          5.0
+##  ---                          
+## 146:          6.7          6.7
+## 147:          6.3          6.3
+## 148:          6.5          6.5
+## 149:          6.2          6.2
+## 150:          5.9          5.9</code></pre>
+</div>
+<div id="subsetting-based-on-rows-and-columns" class="section level2">
+<h2>Subsetting based on rows and columns</h2>
+<pre class="r"><code># Subsetting rows and columns
+DataDfI[Sepal.Length &gt; mean(Sepal.Length),c(&quot;Sepal.Length&quot;,&quot;Sepal.Length&quot;),]</code></pre>
+<pre><code>##     Sepal.Length Sepal.Length
+##  1:          7.0          7.0
+##  2:          6.4          6.4
+##  3:          6.9          6.9
+##  4:          6.5          6.5
+##  5:          6.3          6.3
+##  6:          6.6          6.6
+##  7:          5.9          5.9
+##  8:          6.0          6.0
+##  9:          6.1          6.1
+## 10:          6.7          6.7
+## 11:          6.2          6.2
+## 12:          5.9          5.9
+## 13:          6.1          6.1
+## 14:          6.3          6.3
+## 15:          6.1          6.1
+## 16:          6.4          6.4
+## 17:          6.6          6.6
+## 18:          6.8          6.8
+## 19:          6.7          6.7
+## 20:          6.0          6.0
+## 21:          6.0          6.0
+## 22:          6.0          6.0
+## 23:          6.7          6.7
+## 24:          6.3          6.3
+## 25:          6.1          6.1
+## 26:          6.2          6.2
+## 27:          6.3          6.3
+## 28:          7.1          7.1
+## 29:          6.3          6.3
+## 30:          6.5          6.5
+## 31:          7.6          7.6
+## 32:          7.3          7.3
+## 33:          6.7          6.7
+## 34:          7.2          7.2
+## 35:          6.5          6.5
+## 36:          6.4          6.4
+## 37:          6.8          6.8
+## 38:          6.4          6.4
+## 39:          6.5          6.5
+## 40:          7.7          7.7
+## 41:          7.7          7.7
+## 42:          6.0          6.0
+## 43:          6.9          6.9
+## 44:          7.7          7.7
+## 45:          6.3          6.3
+## 46:          6.7          6.7
+## 47:          7.2          7.2
+## 48:          6.2          6.2
+## 49:          6.1          6.1
+## 50:          6.4          6.4
+## 51:          7.2          7.2
+## 52:          7.4          7.4
+## 53:          7.9          7.9
+## 54:          6.4          6.4
+## 55:          6.3          6.3
+## 56:          6.1          6.1
+## 57:          7.7          7.7
+## 58:          6.3          6.3
+## 59:          6.4          6.4
+## 60:          6.0          6.0
+## 61:          6.9          6.9
+## 62:          6.7          6.7
+## 63:          6.9          6.9
+## 64:          6.8          6.8
+## 65:          6.7          6.7
+## 66:          6.7          6.7
+## 67:          6.3          6.3
+## 68:          6.5          6.5
+## 69:          6.2          6.2
+## 70:          5.9          5.9
+##     Sepal.Length Sepal.Length</code></pre>
+</div>
+<div id="creating-a-new-column-in-data.table-using" class="section level2">
+<h2>Creating a new column in data.table using <strong>:=</strong></h2>
+<p>To generate new columns, we use <strong>:=</strong> syntax. Example shown below.</p>
+<pre class="r"><code>DataDfI[,Sepal.Area := Sepal.Length * Sepal.Width,]
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          5.1         3.5          1.4         0.2    setosa
+##   2:          4.9         3.0          1.4         0.2    setosa
+##   3:          4.7         3.2          1.3         0.2    setosa
+##   4:          4.6         3.1          1.5         0.2    setosa
+##   5:          5.0         3.6          1.4         0.2    setosa
+##  ---                                                            
+## 146:          6.7         3.0          5.2         2.3 virginica
+## 147:          6.3         2.5          5.0         1.9 virginica
+## 148:          6.5         3.0          5.2         2.0 virginica
+## 149:          6.2         3.4          5.4         2.3 virginica
+## 150:          5.9         3.0          5.1         1.8 virginica
+##      Sepal.Area
+##   1:      17.85
+##   2:      14.70
+##   3:      15.04
+##   4:      14.26
+##   5:      18.00
+##  ---           
+## 146:      20.10
+## 147:      15.75
+## 148:      19.50
+## 149:      21.08
+## 150:      17.70</code></pre>
+<p><strong>Note:</strong> The column creation should be done as part of second argument</p>
+<p>One can create multiple columns at one stretch</p>
+<pre class="r"><code>DataDfI[,`:=`(Sepal.Area = Sepal.Length * Sepal.Width,
+              Petal.Area = Petal.Length * Petal.Width),]
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          5.1         3.5          1.4         0.2    setosa
+##   2:          4.9         3.0          1.4         0.2    setosa
+##   3:          4.7         3.2          1.3         0.2    setosa
+##   4:          4.6         3.1          1.5         0.2    setosa
+##   5:          5.0         3.6          1.4         0.2    setosa
+##  ---                                                            
+## 146:          6.7         3.0          5.2         2.3 virginica
+## 147:          6.3         2.5          5.0         1.9 virginica
+## 148:          6.5         3.0          5.2         2.0 virginica
+## 149:          6.2         3.4          5.4         2.3 virginica
+## 150:          5.9         3.0          5.1         1.8 virginica
+##      Sepal.Area Petal.Area
+##   1:      17.85       0.28
+##   2:      14.70       0.28
+##   3:      15.04       0.26
+##   4:      14.26       0.30
+##   5:      18.00       0.28
+##  ---                      
+## 146:      20.10      11.96
+## 147:      15.75       9.50
+## 148:      19.50      10.40
+## 149:      21.08      12.42
+## 150:      17.70       9.18</code></pre>
+<p><strong>Note:</strong> Do not forget to enclose the <strong>:=</strong> by <strong>`</strong></p>
+</div>
+<div id="sorting-a-data.table-using-setorder" class="section level2">
+<h2>Sorting a data.table using <strong>setorder</strong></h2>
+<p>We can use <strong>setorder</strong> synatax for sorting a data table. Example shown below</p>
+<pre class="r"><code># Sort based on the descending order of Petal length
+setorder(DataDfI,-Petal.Length)
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          7.7         2.6          6.9         2.3 virginica
+##   2:          7.7         3.8          6.7         2.2 virginica
+##   3:          7.7         2.8          6.7         2.0 virginica
+##   4:          7.6         3.0          6.6         2.1 virginica
+##   5:          7.9         3.8          6.4         2.0 virginica
+##  ---                                                            
+## 146:          4.4         3.2          1.3         0.2    setosa
+## 147:          5.8         4.0          1.2         0.2    setosa
+## 148:          5.0         3.2          1.2         0.2    setosa
+## 149:          4.3         3.0          1.1         0.1    setosa
+## 150:          4.6         3.6          1.0         0.2    setosa
+##      Sepal.Area Petal.Area
+##   1:      20.02      15.87
+##   2:      29.26      14.74
+##   3:      21.56      13.40
+##   4:      22.80      13.86
+##   5:      30.02      12.80
+##  ---                      
+## 146:      14.08       0.26
+## 147:      23.20       0.24
+## 148:      16.00       0.24
+## 149:      12.90       0.11
+## 150:      16.56       0.20</code></pre>
+<pre class="r"><code># Sort based on the ascending order of Sepal length
+setorder(DataDfI,Sepal.Length)
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          4.3         3.0          1.1         0.1    setosa
+##   2:          4.4         2.9          1.4         0.2    setosa
+##   3:          4.4         3.0          1.3         0.2    setosa
+##   4:          4.4         3.2          1.3         0.2    setosa
+##   5:          4.5         2.3          1.3         0.3    setosa
+##  ---                                                            
+## 146:          7.7         2.6          6.9         2.3 virginica
+## 147:          7.7         3.8          6.7         2.2 virginica
+## 148:          7.7         2.8          6.7         2.0 virginica
+## 149:          7.7         3.0          6.1         2.3 virginica
+## 150:          7.9         3.8          6.4         2.0 virginica
+##      Sepal.Area Petal.Area
+##   1:      12.90       0.11
+##   2:      12.76       0.28
+##   3:      13.20       0.26
+##   4:      14.08       0.26
+##   5:      10.35       0.39
+##  ---                      
+## 146:      20.02      15.87
+## 147:      29.26      14.74
+## 148:      21.56      13.40
+## 149:      23.10      14.03
+## 150:      30.02      12.80</code></pre>
+<p>One can sort based on two columns as well</p>
+<pre class="r"><code># Sort based on the ascending order of Sepal length and then descending order of species
+setorder(DataDfI,Sepal.Length,-Species)
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          4.3         3.0          1.1         0.1    setosa
+##   2:          4.4         2.9          1.4         0.2    setosa
+##   3:          4.4         3.0          1.3         0.2    setosa
+##   4:          4.4         3.2          1.3         0.2    setosa
+##   5:          4.5         2.3          1.3         0.3    setosa
+##  ---                                                            
+## 146:          7.7         2.6          6.9         2.3 virginica
+## 147:          7.7         3.8          6.7         2.2 virginica
+## 148:          7.7         2.8          6.7         2.0 virginica
+## 149:          7.7         3.0          6.1         2.3 virginica
+## 150:          7.9         3.8          6.4         2.0 virginica
+##      Sepal.Area Petal.Area
+##   1:      12.90       0.11
+##   2:      12.76       0.28
+##   3:      13.20       0.26
+##   4:      14.08       0.26
+##   5:      10.35       0.39
+##  ---                      
+## 146:      20.02      15.87
+## 147:      29.26      14.74
+## 148:      21.56      13.40
+## 149:      23.10      14.03
+## 150:      30.02      12.80</code></pre>
+</div>
+<div id="updating-values-using" class="section level2">
+<h2>Updating values using :=</h2>
+<p>To update values in data.table, one can use <strong>:=</strong> operator. Let’s see an example</p>
+<pre class="r"><code>DataDfI[Species == &quot;setosa&quot; &amp; Petal.Length == 1.4,Sepal.Area:=45,]
+DataDfI[Species == &quot;setosa&quot; &amp; Petal.Length == 1.4,,]</code></pre>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal.Area
+##  1:          4.4         2.9          1.4         0.2  setosa         45
+##  2:          4.6         3.4          1.4         0.3  setosa         45
+##  3:          4.6         3.2          1.4         0.2  setosa         45
+##  4:          4.8         3.0          1.4         0.1  setosa         45
+##  5:          4.8         3.0          1.4         0.3  setosa         45
+##  6:          4.9         3.0          1.4         0.2  setosa         45
+##  7:          4.9         3.6          1.4         0.1  setosa         45
+##  8:          5.0         3.6          1.4         0.2  setosa         45
+##  9:          5.0         3.3          1.4         0.2  setosa         45
+## 10:          5.1         3.5          1.4         0.2  setosa         45
+## 11:          5.1         3.5          1.4         0.3  setosa         45
+## 12:          5.2         3.4          1.4         0.2  setosa         45
+## 13:          5.5         4.2          1.4         0.2  setosa         45
+##     Petal.Area
+##  1:       0.28
+##  2:       0.42
+##  3:       0.28
+##  4:       0.14
+##  5:       0.42
+##  6:       0.28
+##  7:       0.14
+##  8:       0.28
+##  9:       0.28
+## 10:       0.28
+## 11:       0.42
+## 12:       0.28
+## 13:       0.28</code></pre>
+<p>One can also use functions to update the specific values</p>
+<pre class="r"><code>DataDfI[Species == &quot;setosa&quot; &amp; Petal.Length == 1.4,Sepal.Area:=(Sepal.Length/Sepal.Width),]
+DataDfI[Species == &quot;setosa&quot; &amp; Petal.Length == 1.4,,]</code></pre>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width Species Sepal.Area
+##  1:          4.4         2.9          1.4         0.2  setosa   1.517241
+##  2:          4.6         3.4          1.4         0.3  setosa   1.352941
+##  3:          4.6         3.2          1.4         0.2  setosa   1.437500
+##  4:          4.8         3.0          1.4         0.1  setosa   1.600000
+##  5:          4.8         3.0          1.4         0.3  setosa   1.600000
+##  6:          4.9         3.0          1.4         0.2  setosa   1.633333
+##  7:          4.9         3.6          1.4         0.1  setosa   1.361111
+##  8:          5.0         3.6          1.4         0.2  setosa   1.388889
+##  9:          5.0         3.3          1.4         0.2  setosa   1.515152
+## 10:          5.1         3.5          1.4         0.2  setosa   1.457143
+## 11:          5.1         3.5          1.4         0.3  setosa   1.457143
+## 12:          5.2         3.4          1.4         0.2  setosa   1.529412
+## 13:          5.5         4.2          1.4         0.2  setosa   1.309524
+##     Petal.Area
+##  1:       0.28
+##  2:       0.42
+##  3:       0.28
+##  4:       0.14
+##  5:       0.42
+##  6:       0.28
+##  7:       0.14
+##  8:       0.28
+##  9:       0.28
+## 10:       0.28
+## 11:       0.42
+## 12:       0.28
+## 13:       0.28</code></pre>
+</div>
+<div id="deleting-columns-using-null" class="section level2">
+<h2>Deleting columns using := NULL</h2>
+<p>To delete columns in data.table, one can use <strong>:= NULL</strong> syntax. Let’s see an example</p>
+<pre class="r"><code>DataDfI[,Sepal.Area:=NULL,]
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          4.3         3.0          1.1         0.1    setosa
+##   2:          4.4         2.9          1.4         0.2    setosa
+##   3:          4.4         3.0          1.3         0.2    setosa
+##   4:          4.4         3.2          1.3         0.2    setosa
+##   5:          4.5         2.3          1.3         0.3    setosa
+##  ---                                                            
+## 146:          7.7         2.6          6.9         2.3 virginica
+## 147:          7.7         3.8          6.7         2.2 virginica
+## 148:          7.7         2.8          6.7         2.0 virginica
+## 149:          7.7         3.0          6.1         2.3 virginica
+## 150:          7.9         3.8          6.4         2.0 virginica
+##      Petal.Area
+##   1:       0.11
+##   2:       0.28
+##   3:       0.26
+##   4:       0.26
+##   5:       0.39
+##  ---           
+## 146:      15.87
+## 147:      14.74
+## 148:      13.40
+## 149:      14.03
+## 150:      12.80</code></pre>
+<p>We can delete multiple columns as well, but the column names should be given as a vector</p>
+<pre class="r"><code>DataDfI[,Sepal.Area:=(Sepal.Length*Sepal.Width),]
+DataDfI[,c(&quot;Sepal.Area&quot;,&quot;Petal.Area&quot;):=NULL,]
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          4.3         3.0          1.1         0.1    setosa
+##   2:          4.4         2.9          1.4         0.2    setosa
+##   3:          4.4         3.0          1.3         0.2    setosa
+##   4:          4.4         3.2          1.3         0.2    setosa
+##   5:          4.5         2.3          1.3         0.3    setosa
+##  ---                                                            
+## 146:          7.7         2.6          6.9         2.3 virginica
+## 147:          7.7         3.8          6.7         2.2 virginica
+## 148:          7.7         2.8          6.7         2.0 virginica
+## 149:          7.7         3.0          6.1         2.3 virginica
+## 150:          7.9         3.8          6.4         2.0 virginica</code></pre>
+</div>
+<div id="removing-duplicates-using-duplicated" class="section level2">
+<h2>Removing duplicates using duplicated</h2>
+<p>We can use <strong>duplicated</strong> syntax for removing duplicates from the data.table</p>
+<pre class="r"><code>DataDfI &lt;- rbind(DataDfI, DataDfI)
+nrow(DataDfI)</code></pre>
+<pre><code>## [1] 300</code></pre>
+<pre class="r"><code>DataDfI &lt;- DataDfI[!duplicated(DataDfI),,]
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          4.3         3.0          1.1         0.1    setosa
+##   2:          4.4         2.9          1.4         0.2    setosa
+##   3:          4.4         3.0          1.3         0.2    setosa
+##   4:          4.4         3.2          1.3         0.2    setosa
+##   5:          4.5         2.3          1.3         0.3    setosa
+##  ---                                                            
+## 145:          7.7         2.6          6.9         2.3 virginica
+## 146:          7.7         3.8          6.7         2.2 virginica
+## 147:          7.7         2.8          6.7         2.0 virginica
+## 148:          7.7         3.0          6.1         2.3 virginica
+## 149:          7.9         3.8          6.4         2.0 virginica</code></pre>
+</div>
+<div id="aggregate-the-data-using-list-and-bylist" class="section level2">
+<h2>Aggregate the data using list() and by=list()</h2>
+<p>Aggregating data is easy to execute in data.table. To aggregate the data, we follow two steps:</p>
+<ul>
+<li>Step 1: Define aggregation methods in second argument of data.table and enclose them in list()</li>
+<li>Step 2: Define the aggregation level and pass it as a third argument in data.table and enclose in by = list()</li>
+</ul>
+<p>Lets see what is the average Petal.Length in for each Species</p>
+<pre class="r"><code>DataDfI[,list(AvgPetalLength = mean(Petal.Length)),by=list(Species)]</code></pre>
+<pre><code>##       Species AvgPetalLength
+## 1:     setosa       1.462000
+## 2:  virginica       5.561224
+## 3: versicolor       4.260000</code></pre>
+<p>When aggregating multiple columns one should separate them by commas</p>
+<p>Lets see what is the average Petal.Length and Petal.Width in for each Species colnames(DataDfI)</p>
+<pre class="r"><code>DataDfI[,list(AvgPetalLength = mean(Petal.Length),
+              AvgPetalWidth = mean(Petal.Width)),
+        by=list(Species)]</code></pre>
+<pre><code>##       Species AvgPetalLength AvgPetalWidth
+## 1:     setosa       1.462000      0.246000
+## 2:  virginica       5.561224      2.028571
+## 3: versicolor       4.260000      1.326000</code></pre>
+<p>Instead of mean, one can also use functions like median(), sum() etc.</p>
+<p>To get count of the rows, one should use <strong>.N</strong></p>
+<pre class="r"><code>DataDfI[,list(Count = .N),by=list(Species)]</code></pre>
+<pre><code>##       Species Count
+## 1:     setosa    50
+## 2:  virginica    49
+## 3: versicolor    50</code></pre>
+<p>One can also get the count of uniques for each columns. To obtain this we have to use <strong>length(unique(Columnname))</strong></p>
+<pre class="r"><code>DataDfI[,list(UniquesPetalLength = length(unique(Petal.Length)),
+              UniquesPetalWidth = length(unique(Petal.Width))),by=list(Species)]</code></pre>
+<pre><code>##       Species UniquesPetalLength UniquesPetalWidth
+## 1:     setosa                  9                 6
+## 2:  virginica                 20                12
+## 3: versicolor                 19                 9</code></pre>
+<p>Note: Make sure that you get only one value after aggregation for each row. If you return multiple values for aggregation, the function will throw an error</p>
+</div>
+<div id="imputing-missing-values-using-and-set" class="section level2">
+<h2>Imputing missing values using := and set</h2>
+<p>Column wise imputation can done as follows</p>
+<pre class="r"><code>DataDfI[is.na(Petal.Length),Petal.Length:=0,]
+DataDfI[is.na(Petal.Width),Petal.Length:=0,]</code></pre>
+<p>One can also impute the values in the whole data.table at once as well. We use the <strong>set</strong> syntax</p>
+<pre class="r"><code>for(j in names(DataDfI))
+  set(DataDfI,which(is.na(DataDfI)),j,0)</code></pre>
+</div>
+<div id="applying-functions-across-the-rows-using-by1nrow-and-.sdcols" class="section level2">
+<h2>Applying functions across the rows using by=1:nrow() and .SDcols</h2>
+<p>When applying functions which deal with more than 3 columns and when using other complex functions, one has to use an additional <strong>by=1:nrow(datatablename)</strong> argument</p>
+<pre class="r"><code>DataDfI[,Species:=as.character(Species),]
+DataDfI[,SpeciesLength := nchar(Species),by=1:nrow(DataDfI)]</code></pre>
+<p>While applying functions only on a subet of columns, use <strong>.SDcols</strong> syntax</p>
+<pre class="r"><code>DataDfI[,Sums:=rowSums(.SD, na.rm = T),.SDcols = c(&quot;Petal.Length&quot;,&quot;Petal.Width&quot;)]
+DataDfI</code></pre>
+<pre><code>##      Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+##   1:          4.3         3.0          1.1         0.1    setosa
+##   2:          4.4         2.9          1.4         0.2    setosa
+##   3:          4.4         3.0          1.3         0.2    setosa
+##   4:          4.4         3.2          1.3         0.2    setosa
+##   5:          4.5         2.3          1.3         0.3    setosa
+##  ---                                                            
+## 145:          7.7         2.6          6.9         2.3 virginica
+## 146:          7.7         3.8          6.7         2.2 virginica
+## 147:          7.7         2.8          6.7         2.0 virginica
+## 148:          7.7         3.0          6.1         2.3 virginica
+## 149:          7.9         3.8          6.4         2.0 virginica
+##      SpeciesLength Sums
+##   1:             6  1.2
+##   2:             6  1.6
+##   3:             6  1.5
+##   4:             6  1.5
+##   5:             6  1.6
+##  ---                   
+## 145:             9  9.2
+## 146:             9  8.9
+## 147:             9  8.7
+## 148:             9  8.4
+## 149:             9  8.4</code></pre>
+</div>
+<div id="summarizing" class="section level2">
+<h2>Summarizing</h2>
+<p>We did the following in data.table so far:</p>
+<ul>
+<li>Created a data.table using <strong>fread, data.table() and as.data.table</strong></li>
+<li>Understood the two comma notation of data.table</li>
+<li>Subsetted the data on rows, columns and both</li>
+<li>Created a new column in data.table using <strong>:=</strong></li>
+<li>Sorted a data.table using <strong>setorder</strong></li>
+<li>Updated values using <strong>:=</strong></li>
+<li>Deleted columns using <strong>:=NULL</strong></li>
+<li>Removed duplicates using <strong>duplicated</strong></li>
+<li>Aggregated the data using <strong>list() and by=list()</strong></li>
+<li>Imputed missing values using <strong>:=</strong> and <strong>set</strong></li>
+<li>Applied functions across the rows using <strong>by=1:nrow()</strong> and <strong>.SDcols</strong></li>
+</ul>
+</div>
+<div id="time-to-forget-data.frame-because-data.table" class="section level2">
+<h2>Time to forget data.frame because data.table…</h2>
+<ul>
+<li>Can process large datasets with <strong>Ease</strong></li>
+<li>Can execute data manipulations atleast <strong>1.5 times Faster</strong></li>
+<li>Has <strong>Shorter</strong> syntaxes: Did you observe any code which was more than a line ;)</li>
+<li>Has <strong>Better</strong> summary representation: Bye bye head() and tail()</li>
+</ul>
+<p><strong>Note:</strong> Have a good day and keep data.tabling :D</p>
+</div>

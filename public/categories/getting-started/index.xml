@@ -6,10 +6,20 @@
     <description>Recent content in Getting Started on Kiran Ganji</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Fri, 06 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 12 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/getting-started/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Getting started with data.table</title>
+      <link>/blog/getting-started-with-data.table/</link>
+      <pubDate>Tue, 12 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/getting-started-with-data.table/</guid>
+      <description>data.table outperforms data.frame in atleast 4 different areasThe following are few reasons why one should prefer data.table instead of data.frame
+Easier to process large datasetsFaster data manipulationsShorter syntaxesBetter summary representationAfter this presentation, you won’t need data.frame because we are going to…Create a data.table using fread, data.table() and as.data.tableUnderstand the two comma notation of data.tableSubset the data on rows, columns and bothCreate a new column in data.</description>
+    </item>
     
     <item>
       <title>Excel must knows</title>
