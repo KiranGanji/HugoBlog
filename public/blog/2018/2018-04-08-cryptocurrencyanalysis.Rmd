@@ -2,7 +2,7 @@
 title: "Cryptocurrency analysis - What to trade?"
 author: "Kiran Ganji"
 date: 2018-04-08
-categories: ["Analysis"]
+categories: ["Data Science"]
 ---
 
 I recently developed a rudimentary method to identify the potential cryptocurrencies to BUY and trade. I did this exercise for Gramener's blog. Reposting the same below. The actual article that I wrote can be found [here](http://blog.gramener.com/3030/a-trading-strategy-for-cryptocurrencies)

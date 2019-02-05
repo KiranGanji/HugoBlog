@@ -21,26 +21,5 @@
 Easier to process large datasetsFaster data manipulationsShorter syntaxesBetter summary representationAfter this presentation, you won’t need data.frame because we are going to…Create a data.table using fread, data.table() and as.data.tableUnderstand the two comma notation of data.tableSubset the data on rows, columns and bothCreate a new column in data.</description>
     </item>
     
-    <item>
-      <title>Excel must knows</title>
-      <link>/blog/excel-must-knows/</link>
-      <pubDate>Fri, 06 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/excel-must-knows/</guid>
-      <description>Microsoft Excel is a godsend for anyone who want to analyze and visualize data. In this article let’s look at some of the must-knows of excel to get started.
-Anyone who wishes to master excel should know the following aspects:
-Navigation using shortcuts - Boosts productivity by atleast 20%Pivot tables - Aggregates and unlocks the relationships between variablesFormulas - Help derive new metrics, define KPIs, transform and quantify variablesVisualization - Make sense of the data through a visual aidSolver - Advanced optimization with easeAlt, Ctrl and Shift are your friends when it comes to navigating around in excelKeyboard shortcuts help you move around in excel without using mouse.</description>
-    </item>
-    
-    <item>
-      <title>Getting started with Data Science</title>
-      <link>/blog/getting-started-with-data-science/</link>
-      <pubDate>Thu, 05 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/getting-started-with-data-science/</guid>
-      <description>Knowing SQL, R/Python, Excel &amp;amp; Powerpoint will get the data science engine startedData scientist is the sexiest job of 21st century. Below given are some tools that a newbie in data science should get familiar with:
-Excel - Can’t stress enough, but this is a must and should!SQL, R, Python - R (or) Python should suffice. It never hurts to have both in pocket.Power point, Tableau, Power BISublime text editor, Dropbox paperDatabases &amp;amp; Websites are crucial sources of dataAlmost all the companies, small and big, keep their data in databases.</description>
-    </item>
-    
   </channel>
 </rss>

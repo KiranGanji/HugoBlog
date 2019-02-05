@@ -2,7 +2,7 @@
 title: "Excel must knows"
 author: "Kiran Ganji"
 date: 2018-04-06
-categories: ["Getting Started"]
+categories: ["Data Science"]
 ---
 
 Microsoft Excel is a godsend for anyone who want to analyze and visualize data. In this article let's look at some of the must-knows of excel to get started.

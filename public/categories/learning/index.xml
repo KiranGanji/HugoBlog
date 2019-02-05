@@ -13,10 +13,10 @@
     
     <item>
       <title>Linear regression - Must knows</title>
-      <link>/blog/linear-regression---must-knows/</link>
+      <link>/blog/linear-regression-must-knows/</link>
       <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/linear-regression---must-knows/</guid>
+      <guid>/blog/linear-regression-must-knows/</guid>
       <description>Linear regression is one of the easiest and first taught models. But there is more to the algorithm than it appears. Given its simplicity, it is often abused. In this article, let’s get some facts straight about the algorithm.
 Must-knows about linear regression:
 Linear regression derives a trend line that best fits the dataThere should be linear relationship between response variable &amp;amp; predictors and predictors shouldn’t be correlatedResiduals (Actual - Fitted) should be normally distributed, have constant variance and shouldn’t be autocorrelated.</description>

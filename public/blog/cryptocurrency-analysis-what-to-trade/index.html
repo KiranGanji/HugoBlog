@@ -15,9 +15,9 @@
 <meta property="og:site_name" content="Kiran Ganji" />
 <meta property="og:locale" content="nn_NO" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/blog/excel-must-knows/" />
-<meta property="og:title" content="Excel must knows" />
-<meta property="twitter:title" content="Excel must knows">
+<meta property="og:url" content="/blog/cryptocurrency-analysis-what-to-trade/" />
+<meta property="og:title" content="Cryptocurrency analysis - What to trade?" />
+<meta property="twitter:title" content="Cryptocurrency analysis - What to trade?">
 
     <meta property="twitter:card" content="summary">
 
@@ -27,10 +27,10 @@
 <title>
 
 
-     Kiran Ganji - Excel must knows 
+     Kiran Ganji - Cryptocurrency analysis - What to trade? 
 
 </title>
-<link rel="canonical" href="/blog/excel-must-knows/">
+<link rel="canonical" href="/blog/cryptocurrency-analysis-what-to-trade/">
 
 
 <style media="screen">
@@ -1096,19 +1096,19 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                 <div class="title-container">
                     <div class="page-heading">
 
-    Excel must knows
+    Cryptocurrency analysis - What to trade?
 
 </div>
 
                 </div>
                 <div class="meta">
-                    <div class="date" title="Fri Apr 6 2018 00:00:00 UTC">Apr 6, 2018</div>
+                    <div class="date" title="Sun Apr 8 2018 00:00:00 UTC">Apr 8, 2018</div>
                     
                         
                         <div class="author middot" title="Kiran Ganji">Kiran Ganji</div>
                         
                     
-                    <div class="reading-time middot">5 minute read</div>
+                    <div class="reading-time middot">3 minute read</div>
                     <div class="tags">
                         <ul>
                           
@@ -1128,84 +1128,50 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     
 
 
-<p>Microsoft Excel is a godsend for anyone who want to analyze and visualize data. In this article let’s look at some of the must-knows of excel to get started.</p>
-<p>Anyone who wishes to master excel should know the following aspects:</p>
+<p>I recently developed a rudimentary method to identify the potential cryptocurrencies to BUY and trade. I did this exercise for Gramener’s blog. Reposting the same below. The actual article that I wrote can be found <a href="http://blog.gramener.com/3030/a-trading-strategy-for-cryptocurrencies">here</a></p>
+<p>I followed the below steps:</p>
 <ul>
-<li>Navigation using shortcuts - Boosts productivity by atleast 20%</li>
-<li>Pivot tables - Aggregates and unlocks the relationships between variables</li>
-<li>Formulas - Help derive new metrics, define KPIs, transform and quantify variables</li>
-<li>Visualization - Make sense of the data through a visual aid</li>
-<li>Solver - Advanced optimization with ease</li>
+<li>Scraped the entire trading history of each of the cryptocurrencies available at <a href="https://coinmarketcap.com/">CoinMarketCap</a></li>
+<li>Filtered cryptocurrencies based on Market capital, moving averages and Prices</li>
+<li>Ran a greedy search to identify the combination of moving averages that yielded maximum profits on cross over points trading strategy.</li>
+<li>Calculated a <em>ROI</em>, <em>Profit/Trade</em> and <em>trade frequency</em> to shortlist the final set of cryptos to trade</li>
 </ul>
-<div id="alt-ctrl-and-shift-are-your-friends-when-it-comes-to-navigating-around-in-excel" class="section level2">
-<h2>Alt, Ctrl and Shift are your friends when it comes to navigating around in excel</h2>
-<p>Keyboard shortcuts help you move around in excel without using mouse. Every menu function in excel has a shortcut and one can view the letter that represents it by pressing Alt key. Once you press Alt, individual letters pop up in excel for each menu and following the letters you can generate the shortcuts you wish. For example, let’s say you want to increase column width to fit the title. You can do this by selecting the column -&gt; going to the home tab -&gt; Format -&gt; “Auto fit the column width”. The similar function can also be achieved by pressing Alt + H + O + I keys in the sequence.</p>
-<p>Below given are some of the must know shortcuts:</p>
+<div id="coinmarketcap-holds-the-entire-trading-history-of-all-the-cryptocurrencies-and-is-easy-to-scrape" class="section level2">
+<h2>CoinMarketCap holds the entire trading history of all the cryptocurrencies and is easy to scrape</h2>
+<p>I scraped the required data in two levels. In level 1, I scraped a table from summary page which lists all the current cryptocurrencies. This table has latest market capital holdings, price and volume traded. This table also has the URL for each of the individual cryptocurrencies. I collected these.</p>
+<p>Using the URLs collected from level 1, I individually scraped trading history from each page. There are two cryptocurrencies with duplicate names - Enigma and HempCoin. I wrote a clause within the code to change the names when the scraper encounters either of the names.</p>
+</div>
+<div id="using-market-capital-moving-averages-and-prices-filtered-the-cryptocurrencies" class="section level2">
+<h2>Using market capital, moving averages and prices, filtered the cryptocurrencies</h2>
+<p>Once I had all the historical data for each cryptocurrencies, I filtered the cryptocurrencies using the below logic:</p>
 <ul>
-<li><em>Ctrl + Arrow keys</em> - Move to the last row/column within the respective table</li>
-<li><em>Ctrl + Shift + Arrow keys</em> - Select the entire row/column within the respective table</li>
-<li><em>Ctrl + Shift + 8</em> - Select the entire table</li>
-<li><em>Alt + I + C</em> - Create a new column to the left</li>
-<li><em>Alt + I + R</em> - Create a new row above the current cell</li>
-<li><em>Ctrl + -</em> - Delete the cells, columns, rows</li>
-<li><em>Ctrl + 0</em> - Hide the columns</li>
-<li><em>Alt + H + E + A</em> - Clear the contents of the cells selected</li>
-<li><em>Alt + N + V</em> - Insert a pivot table</li>
-<li><em>Alt + =</em> - Generate the sum of the selected numbers</li>
-<li><em>Alt + H + L + S</em> - Apply conditional formatting with Green indicating the highest and Red indicating the lowest</li>
-<li><em>Alt + A + M</em> - Remove duplicates</li>
-<li><em>Alt + D + G + G</em> - Group rows/columns</li>
-<li><em>Ctrl + Shift + L</em> - Generate filters for the table</li>
-<li><em>Alt + Down arrow key</em> - To open up the filter menu (Do this after the Ctrl + Shift + L)</li>
-<li><em>Alt + W + F + F</em> - Freeze rows above and columns to the left of the cell</li>
-<li><em>Alt + W + F + R</em> - Freeze top row of the table</li>
-<li><em>Alt + W + F + C</em> - Freeze first column of the table</li>
-<li><em>Ctrl + Page Down</em> - Move to next sheet</li>
-<li><em>Ctrl + Page Up</em> - Move to previous sheet</li>
+<li>Removed the cryptocurrencies which had zero market capital</li>
+<li>Filtered cryptocurrencies that traded for less than 90 days</li>
+<li>Calculated 10, 20, 30, 40 &amp; 50 day moving averages and filtered out currencies whose current price is less than the moving averages. These are the potential cryptocurrencies to BUY</li>
+<li>Finally, filtered the cryptocurrencies which traded greater than $0.25. This is for higher returns.</li>
 </ul>
 </div>
-<div id="pivot-tables-help-in-aggregation-and-comparison-of-various-variables" class="section level2">
-<h2>Pivot tables help in aggregation and comparison of various variables</h2>
-<p>Pivot tables provide a GUI for aggregation and help explore relationship between variables. Pivot tables are simple and straight forward to use in excel. A pivot table control panel has 4 tabs. Report filter which lets you add columns whose values you want to specifically filter, Rows for what variable should populate as rows, Columns for what to variables should populate in columns and finally Values tab for the aggregation type preferred. Below provided are few things about pivot table one needs to know:</p>
+<div id="using-greedy-search-identified-the-combination-of-moving-averages-that-yielded-maximum-profits" class="section level2">
+<h2>Using greedy search, identified the combination of moving averages that yielded maximum profits</h2>
+<p>In order to understand which moving averages to pick, I developed a back testing process which:</p>
 <ul>
-<li>Aggregation methods available are Sum, Count, Average, Max, Min, Std deviation</li>
-<li>One can also calculate the percentages based on the row grand total, column grand total or parent totals</li>
-<li>One can create a calculated fields based on formula including multiple columns</li>
-<li>From excel 2013 onwards, you can also get unique value counts</li>
-<li>Charts constructing using pivot table are interactive as well</li>
+<li>Picks two unequal moving averages</li>
+<li>At the point where the shorter day moving average takes over longer day moving average, it executes a BUY trade and vice versa.</li>
+<li>Repeats the above step for the entire history</li>
+<li>Collects the total profit &amp; total trades made.</li>
+<li>Write them to the data frame.</li>
 </ul>
+<p>I repeated the above process for all the cryptocurrencies and for all the combinations from 2 until 50 moving averages. I sorted each of them through the profits made. I finally selected the moving averages with the highest profits.</p>
 </div>
-<div id="excel-formulas-help-derive-new-metrics-define-kpis-transform-and-quantify-variables" class="section level2">
-<h2>Excel formulas help derive new metrics, define KPIs, transform and quantify variables</h2>
-<p>Formulas are the reason why excel can accommodate complex reports. One can link multiple cells based on a formulas and construct a what-if scenarios. This is just the tip of the iceberg. One can join multiple tables, write multiple if clauses, aggregate the counts only if they meet certain criteria, calculate sum, averages, standard deviations, calculate interests and so on. The possibilities are unlimited. For now, the ones which I use on a regular basis are provided below:</p>
-<ul>
-<li><em>SUM</em> - Calculates the sum of the numbers</li>
-<li><em>AVERAGE</em> - Calculates the average of the numbers</li>
-<li><em>VLOOKUP</em> - Joining two tables</li>
-<li><em>IF</em> - If else statement</li>
-<li><em>COUNTIF</em> - Counts the numbers/rows that meet a specific criteria</li>
-<li><em>LEFT</em> - Cuts the string from left to the amount of characters specified</li>
-<li><em>RIGHT</em> - Cuts the string from right to the amount of the characters specified</li>
-<li><em>MID</em> - Cuts the strings from middle</li>
-<li><em>DATE</em> - Takes year, month and day separately and converts into a text format</li>
-<li><em>MATCH</em> - Returns the row number/index of a string in a table</li>
-<li><em>AND</em>/OR - Operators for checking multiple conditions</li>
-<li><em>LEN</em> - Returns number of characters of a string</li>
-<li><em>STDDEV.S</em> - Returns sample standard deviation of the numbers</li>
-<li><em>STDDEV.P</em> - Returns population standard deviation of the numbers</li>
-<li><em>TRIM</em> - Trims the leading/lagging spaces from the strings</li>
-</ul>
-<p>Some other formulas which I don’t use frequently but good to be aware of are <em>INDIRECT</em>, <em>IFERROR</em>, <em>RAND</em>, <em>RANDBETWEEN</em>, <em>UPPER</em>, <em>LOWER</em>, <em>SUBSTITUTE</em>, <em>YEAR</em>, <em>MONTH</em>, <em>DAY</em>, <em>WEEKDAY</em>, <em>WEEKNUM</em>, <em>SUMIF</em>, <em>LOG</em>, <em>LN</em>, <em>ISERROR</em>, <em>ISNA</em>, <em>ISEVEN</em>, <em>ISODD</em>.</p>
+<div id="using-metrics-like-profitunit-roi-profittrade-and-trade-frequency-i-shortlisted-final-cryptos-to-trade" class="section level2">
+<h2>Using metrics like <em>Profit/Unit</em>, <em>ROI</em>, <em>Profit/Trade</em> and <em>trade frequency</em>, I shortlisted final cryptos to trade</h2>
+<p>Based on the total profits, number of trades and price, I derived <em>ROI</em> as <em>Profit/Price</em>, Profit per trade as <em>Profit/Trades(#)</em> and <em>Trade Frequency</em> as <em>Trades(#)/(Total trading days)</em>. Based on these metrics, I picked cryptocurrencies that had highest values within in each category.</p>
+<p>Note 1: The codes written for this analysis can be found <a href="https://github.com/KiranGanji/cryptocurrencybacktest">here</a></p>
+<p>Note 2: This entire analysis has been converted into a beautiful infographic by my colleague, <a href="https://in.linkedin.com/in/ankita-dash-8547366b">Ankita Dash</a>. Posting the infographic down below.</p>
+<div class="figure">
+<figure class="progressive"><img class="progressive__img progressive--not-loaded" data-progressive="/img/cryptocurrencies.png" src="/img/low/cryptocurrencies.png" alt="Cryptocurreny analysis infographic" /></figure>
+<p class="caption">Cryptocurreny analysis infographic</p>
 </div>
-<div id="conditional-formatting-and-charts-serve-as-the-visual-aid-for-making-sense-of-the-data" class="section level2">
-<h2>Conditional formatting and charts serve as the visual aid for making sense of the data</h2>
-<p>Conditional formatting is the flag bearer of excel. Using conditional formatting, one can construct heat maps across numerical data to detect patterns and anomalies. Excel provides many visually appealing formatting options to choose from which includes custom color scales, bars, icons and shapes.</p>
-<p>If conditional formatting help make sense of tables, charts help make sense of the data using graphs. There are trove of charts with heavy customizable options to choose from. The charts in excel exclude Bar graphs, Stacked column, Pie, Area, scatter, bubble, stocks charts.</p>
-</div>
-<div id="solver-helps-construct-simple-mockups-for-complex-optimization-engines" class="section level2">
-<h2>Solver helps construct simple mockups for complex optimization engines</h2>
-<p>Solver comes as part of the Analysis toolpak package. This allows one to create objective function, create constrains and an option to minimize or maximize the objective using linear, non-linear and Genetic algorithms.</p>
-<p>This comes in handy for most of the analyses and to construct simple mockup optimization engines before productionization.</p>
 </div>
 
 
@@ -1217,13 +1183,13 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     
                     <div>
                         <img class="icon" src="/img/back.svg" alt="back" />
-                        <a href="/blog/getting-started-with-data-science/">Getting started with Data Science</a>
+                        <a href="/blog/excel-must-knows/">Excel must knows</a>
                     </div>
                     
                     <div style="width: 100%;"></div>
                     
                     <div>
-                        <a href="/blog/cryptocurrency-analysis-what-to-trade/">Cryptocurrency analysis - What to trade?</a>
+                        <a href="/blog/linear-regression-must-knows/">Linear regression - Must knows</a>
                         <img class="icon" src="/img/next.svg" alt="next" />
                     </div>
                     

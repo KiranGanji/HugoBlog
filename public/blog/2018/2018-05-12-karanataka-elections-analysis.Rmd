@@ -2,7 +2,7 @@
 title: "Karnataka Election Projections"
 author: "Kiran Ganji"
 date: 2018-05-12
-categories: ["Analysis"]
+categories: ["Data Science"]
 ---
 
 The Karnataka elections are just around the corner and election analysis is the most interesting of the bunch to do in the field of analytics. The entire last week, I tried answering one question - Can we project the constituency affiliations of major contesting parties of Karnataka.

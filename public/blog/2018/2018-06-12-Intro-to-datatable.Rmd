@@ -1,8 +1,8 @@
 ---
 title: "Getting started with data.table"
 author: "Kiran Ganji"
-date: 2018-06-12
-categories: ["Getting Started"]
+date: 2018-06-15
+categories: ["Data Science"]
 ---
 
 

@@ -15,9 +15,9 @@
 <meta property="og:site_name" content="Kiran Ganji" />
 <meta property="og:locale" content="nn_NO" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/blog/excel-must-knows/" />
-<meta property="og:title" content="Excel must knows" />
-<meta property="twitter:title" content="Excel must knows">
+<meta property="og:url" content="/blog/linear-regression-must-knows/" />
+<meta property="og:title" content="Linear regression - Must knows" />
+<meta property="twitter:title" content="Linear regression - Must knows">
 
     <meta property="twitter:card" content="summary">
 
@@ -27,10 +27,10 @@
 <title>
 
 
-     Kiran Ganji - Excel must knows 
+     Kiran Ganji - Linear regression - Must knows 
 
 </title>
-<link rel="canonical" href="/blog/excel-must-knows/">
+<link rel="canonical" href="/blog/linear-regression-must-knows/">
 
 
 <style media="screen">
@@ -1096,19 +1096,19 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                 <div class="title-container">
                     <div class="page-heading">
 
-    Excel must knows
+    Linear regression - Must knows
 
 </div>
 
                 </div>
                 <div class="meta">
-                    <div class="date" title="Fri Apr 6 2018 00:00:00 UTC">Apr 6, 2018</div>
+                    <div class="date" title="Fri Apr 20 2018 00:00:00 UTC">Apr 20, 2018</div>
                     
                         
                         <div class="author middot" title="Kiran Ganji">Kiran Ganji</div>
                         
                     
-                    <div class="reading-time middot">5 minute read</div>
+                    <div class="reading-time middot">3 minute read</div>
                     <div class="tags">
                         <ul>
                           
@@ -1128,84 +1128,27 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
     
 
 
-<p>Microsoft Excel is a godsend for anyone who want to analyze and visualize data. In this article let’s look at some of the must-knows of excel to get started.</p>
-<p>Anyone who wishes to master excel should know the following aspects:</p>
+<p>Linear regression is one of the easiest and first taught models. But there is more to the algorithm than it appears. Given its simplicity, it is often abused. In this article, let’s get some facts straight about the algorithm.</p>
+<p>Must-knows about linear regression:</p>
 <ul>
-<li>Navigation using shortcuts - Boosts productivity by atleast 20%</li>
-<li>Pivot tables - Aggregates and unlocks the relationships between variables</li>
-<li>Formulas - Help derive new metrics, define KPIs, transform and quantify variables</li>
-<li>Visualization - Make sense of the data through a visual aid</li>
-<li>Solver - Advanced optimization with ease</li>
+<li>Linear regression derives a trend line that best fits the data</li>
+<li>There should be linear relationship between response variable &amp; predictors and predictors shouldn’t be correlated</li>
+<li>Residuals (Actual - Fitted) should be normally distributed, have constant variance and shouldn’t be autocorrelated.</li>
 </ul>
-<div id="alt-ctrl-and-shift-are-your-friends-when-it-comes-to-navigating-around-in-excel" class="section level2">
-<h2>Alt, Ctrl and Shift are your friends when it comes to navigating around in excel</h2>
-<p>Keyboard shortcuts help you move around in excel without using mouse. Every menu function in excel has a shortcut and one can view the letter that represents it by pressing Alt key. Once you press Alt, individual letters pop up in excel for each menu and following the letters you can generate the shortcuts you wish. For example, let’s say you want to increase column width to fit the title. You can do this by selecting the column -&gt; going to the home tab -&gt; Format -&gt; “Auto fit the column width”. The similar function can also be achieved by pressing Alt + H + O + I keys in the sequence.</p>
-<p>Below given are some of the must know shortcuts:</p>
-<ul>
-<li><em>Ctrl + Arrow keys</em> - Move to the last row/column within the respective table</li>
-<li><em>Ctrl + Shift + Arrow keys</em> - Select the entire row/column within the respective table</li>
-<li><em>Ctrl + Shift + 8</em> - Select the entire table</li>
-<li><em>Alt + I + C</em> - Create a new column to the left</li>
-<li><em>Alt + I + R</em> - Create a new row above the current cell</li>
-<li><em>Ctrl + -</em> - Delete the cells, columns, rows</li>
-<li><em>Ctrl + 0</em> - Hide the columns</li>
-<li><em>Alt + H + E + A</em> - Clear the contents of the cells selected</li>
-<li><em>Alt + N + V</em> - Insert a pivot table</li>
-<li><em>Alt + =</em> - Generate the sum of the selected numbers</li>
-<li><em>Alt + H + L + S</em> - Apply conditional formatting with Green indicating the highest and Red indicating the lowest</li>
-<li><em>Alt + A + M</em> - Remove duplicates</li>
-<li><em>Alt + D + G + G</em> - Group rows/columns</li>
-<li><em>Ctrl + Shift + L</em> - Generate filters for the table</li>
-<li><em>Alt + Down arrow key</em> - To open up the filter menu (Do this after the Ctrl + Shift + L)</li>
-<li><em>Alt + W + F + F</em> - Freeze rows above and columns to the left of the cell</li>
-<li><em>Alt + W + F + R</em> - Freeze top row of the table</li>
-<li><em>Alt + W + F + C</em> - Freeze first column of the table</li>
-<li><em>Ctrl + Page Down</em> - Move to next sheet</li>
-<li><em>Ctrl + Page Up</em> - Move to previous sheet</li>
-</ul>
+<div id="linear-regression-derives-a-trend-line-that-best-fits-the-data" class="section level2">
+<h2>Linear regression derives a trend line that best fits the data</h2>
+<p>Linear regression that we generally use is called Ordinary Least Squares regression (or) OLS regression. This method calculates best-fitting line for the observed data by minimizing the vertical deviations from each data point to the line. We measure the deviation as the square of the distance of the line to the point. We square it so that, when we add individual deviations, the positive and negative deviations do not cancel out. Hence the objective function of this algorithm will be sum of squared deviations.</p>
 </div>
-<div id="pivot-tables-help-in-aggregation-and-comparison-of-various-variables" class="section level2">
-<h2>Pivot tables help in aggregation and comparison of various variables</h2>
-<p>Pivot tables provide a GUI for aggregation and help explore relationship between variables. Pivot tables are simple and straight forward to use in excel. A pivot table control panel has 4 tabs. Report filter which lets you add columns whose values you want to specifically filter, Rows for what variable should populate as rows, Columns for what to variables should populate in columns and finally Values tab for the aggregation type preferred. Below provided are few things about pivot table one needs to know:</p>
-<ul>
-<li>Aggregation methods available are Sum, Count, Average, Max, Min, Std deviation</li>
-<li>One can also calculate the percentages based on the row grand total, column grand total or parent totals</li>
-<li>One can create a calculated fields based on formula including multiple columns</li>
-<li>From excel 2013 onwards, you can also get unique value counts</li>
-<li>Charts constructing using pivot table are interactive as well</li>
-</ul>
+<div id="there-should-be-linear-relationship-between-response-variable-predictors-and-predictors-shouldnt-be-correlated" class="section level2">
+<h2>There should be linear relationship between response variable &amp; predictors and predictors shouldn’t be correlated</h2>
+<p>Linear regression draws a straight line and cannot draw a curve. Therefore it’s a pre-requisite that the response and predictor variables are linearly related. Other pre-requisite is that the predictors shouldn’t be correlated to each other. In the case of correlated predictors, it becomes tough task to figure out which predictor is actually contributing to the response variable.</p>
 </div>
-<div id="excel-formulas-help-derive-new-metrics-define-kpis-transform-and-quantify-variables" class="section level2">
-<h2>Excel formulas help derive new metrics, define KPIs, transform and quantify variables</h2>
-<p>Formulas are the reason why excel can accommodate complex reports. One can link multiple cells based on a formulas and construct a what-if scenarios. This is just the tip of the iceberg. One can join multiple tables, write multiple if clauses, aggregate the counts only if they meet certain criteria, calculate sum, averages, standard deviations, calculate interests and so on. The possibilities are unlimited. For now, the ones which I use on a regular basis are provided below:</p>
-<ul>
-<li><em>SUM</em> - Calculates the sum of the numbers</li>
-<li><em>AVERAGE</em> - Calculates the average of the numbers</li>
-<li><em>VLOOKUP</em> - Joining two tables</li>
-<li><em>IF</em> - If else statement</li>
-<li><em>COUNTIF</em> - Counts the numbers/rows that meet a specific criteria</li>
-<li><em>LEFT</em> - Cuts the string from left to the amount of characters specified</li>
-<li><em>RIGHT</em> - Cuts the string from right to the amount of the characters specified</li>
-<li><em>MID</em> - Cuts the strings from middle</li>
-<li><em>DATE</em> - Takes year, month and day separately and converts into a text format</li>
-<li><em>MATCH</em> - Returns the row number/index of a string in a table</li>
-<li><em>AND</em>/OR - Operators for checking multiple conditions</li>
-<li><em>LEN</em> - Returns number of characters of a string</li>
-<li><em>STDDEV.S</em> - Returns sample standard deviation of the numbers</li>
-<li><em>STDDEV.P</em> - Returns population standard deviation of the numbers</li>
-<li><em>TRIM</em> - Trims the leading/lagging spaces from the strings</li>
-</ul>
-<p>Some other formulas which I don’t use frequently but good to be aware of are <em>INDIRECT</em>, <em>IFERROR</em>, <em>RAND</em>, <em>RANDBETWEEN</em>, <em>UPPER</em>, <em>LOWER</em>, <em>SUBSTITUTE</em>, <em>YEAR</em>, <em>MONTH</em>, <em>DAY</em>, <em>WEEKDAY</em>, <em>WEEKNUM</em>, <em>SUMIF</em>, <em>LOG</em>, <em>LN</em>, <em>ISERROR</em>, <em>ISNA</em>, <em>ISEVEN</em>, <em>ISODD</em>.</p>
-</div>
-<div id="conditional-formatting-and-charts-serve-as-the-visual-aid-for-making-sense-of-the-data" class="section level2">
-<h2>Conditional formatting and charts serve as the visual aid for making sense of the data</h2>
-<p>Conditional formatting is the flag bearer of excel. Using conditional formatting, one can construct heat maps across numerical data to detect patterns and anomalies. Excel provides many visually appealing formatting options to choose from which includes custom color scales, bars, icons and shapes.</p>
-<p>If conditional formatting help make sense of tables, charts help make sense of the data using graphs. There are trove of charts with heavy customizable options to choose from. The charts in excel exclude Bar graphs, Stacked column, Pie, Area, scatter, bubble, stocks charts.</p>
-</div>
-<div id="solver-helps-construct-simple-mockups-for-complex-optimization-engines" class="section level2">
-<h2>Solver helps construct simple mockups for complex optimization engines</h2>
-<p>Solver comes as part of the Analysis toolpak package. This allows one to create objective function, create constrains and an option to minimize or maximize the objective using linear, non-linear and Genetic algorithms.</p>
-<p>This comes in handy for most of the analyses and to construct simple mockup optimization engines before productionization.</p>
+<div id="residuals-should-be-normally-distributed-have-constant-variance-and-shouldnt-be-autocorrelated." class="section level2">
+<h2>Residuals should be normally distributed, have constant variance and shouldn’t be autocorrelated.</h2>
+<p>OLS regression is very sensitive to outliers. Presence of outliers can distort true relationship between response variable and predictors. Residuals provide us a way to understand if the regression coefficients are trust worthy. Residuals, if normally distributed, indicate that they data is void of outliers. If residuals are not distributed normally, there are chances that the outliers exist and that the model is not trust worthy.</p>
+<p>There is another way of testing the same outliers effect. Check the variance of the residuals. If they are scattered without any patterns, that indicates the constant variance. Else, there are outliers which get too much weight and disproportionately influences the model’s performance.</p>
+<p>In the case of time series, the residuals are usually correlated with their lagged values. This is called autocorrelation. Presence of autocorrelation, effects the p-values of prediction intervals rendering the models untrustworthy. It is always recommended to check this assumption as well.</p>
+<p>In this article, we learned the assumptions behind the regression and next article lets implement these practically with an example.</p>
 </div>
 
 
@@ -1217,13 +1160,13 @@ div.main .content .markdown pre, div.main .content .markdown pre code {
                     
                     <div>
                         <img class="icon" src="/img/back.svg" alt="back" />
-                        <a href="/blog/getting-started-with-data-science/">Getting started with Data Science</a>
+                        <a href="/blog/cryptocurrency-analysis-what-to-trade/">Cryptocurrency analysis - What to trade?</a>
                     </div>
                     
                     <div style="width: 100%;"></div>
                     
                     <div>
-                        <a href="/blog/cryptocurrency-analysis-what-to-trade/">Cryptocurrency analysis - What to trade?</a>
+                        <a href="/blog/karnataka-election-projections/">Karnataka Election Projections</a>
                         <img class="icon" src="/img/next.svg" alt="next" />
                     </div>
                     

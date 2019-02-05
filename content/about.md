@@ -3,9 +3,11 @@ date = "2018-04-04"
 title = "About"
 +++
 
-Data science is an unique field. You have to be creative, structured and thorough and that is why I love this field. I am Kiran Ganji and currently working as an Analyst at [Gramener](https://gramener.com/). I love solving complex problems and I am an aspiring consultant. 
+Hola! I am Kiran Ganji and currently a Data Scientist at [Quantium](https://quantium.com/). I am a passionate data geek and a traveller. I typically dive deep into data to listen to what it has to say and apply the same to the life when I travel.
 
-I like statistical programming language R, Technology, International politics and Finance. I graduated from [NIT Calicut](http://nitc.ac.in/) with majors in Biotechnology. Since my graduation I worked with [LatentView Analytics](https://www.latentview.com/) and [Gramener](https://gramener.com/)  
+Graduated from [NIT Calicut](http://nitc.ac.in/) with majors in Biotechnology. Post my graduation, I worked with [LatentView Analytics](https://www.latentview.com/), [Gramener](https://gramener.com/) and [Quantium](https://quantium.com/)
+
+I started travelling extensively only from August of 2018 and and explored quite a few places since.   
  
 Currently, I live in Hyderabad and have lived in Calicut, Trivandrum, Bangalore, Chennai and Kuala Lumpur.
 

@@ -22,16 +22,5 @@ And trying to answer the question led me to the following:
 Karnataka has 224 constituencies of which 169 exist from 1978 and 55 from 2008Congress won 5 out of the past 9 elections stating that it has a strong presenceOf the 224 constituencies, 91 constituencies have a medium to high probability of Congress winning them.</description>
     </item>
     
-    <item>
-      <title>Cryptocurrency analysis - What to trade?</title>
-      <link>/blog/cryptocurrency-analysis---what-to-trade/</link>
-      <pubDate>Sun, 08 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/cryptocurrency-analysis---what-to-trade/</guid>
-      <description>I recently developed a rudimentary method to identify the potential cryptocurrencies to BUY and trade. I did this exercise for Gramener’s blog. Reposting the same below. The actual article that I wrote can be found here
-I followed the below steps:
-Scraped the entire trading history of each of the cryptocurrencies available at CoinMarketCapFiltered cryptocurrencies based on Market capital, moving averages and PricesRan a greedy search to identify the combination of moving averages that yielded maximum profits on cross over points trading strategy.</description>
-    </item>
-    
   </channel>
 </rss>

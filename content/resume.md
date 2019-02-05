@@ -5,12 +5,17 @@ title = "Resume"
 
 ## Professional Summary
 
-Data Scientist with 2.5 years of experience in Predictive Analytics consulting. Conceptualized and delivered actionable models across Finance, Manufacturing and Retail industries. Currently, at Gramener, responsible for end-to-end delivery of advanced analytics projects. Have cross-industry experience on working with clients across geographies and considerable expertise in Statistics & Machine Learning.
+Data Scientist with 3+ years experience in Predictive Analytics consulting. Conceptualized and delivered actionable models across Finance, Manufacturing, Retail & Property industries. Currently, at Quantium, responsible for end-to-end delivery of advanced analytics projects. Have cross-industry experience on working with clients across geographies and considerable expertise in Statistics & Machine Learning.
 
 ## Experience
 
+#### Analyst, Quantium
+Aug 2018 - Present
+
+* **Customer Churn prediction** - Provided a solution to increasing customer churn of the client's product by predicting the customer churn based on the key indicators. Built a system that regularly analyzes the customer activity with the client's product and flags off the high risk customers
+
 #### Analyst, Gramener
-Dec 2016 - Present
+Dec 2016 - Jul 2018
 
 Worked on multiple advanced analytics projects for large clients in different areas - Stock trading, Commodity price forecasting and recommendation engines.
 

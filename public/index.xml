@@ -6,7 +6,7 @@
     <description>Recent content on Kiran Ganji</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 12 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Getting started with data.table</title>
       <link>/blog/getting-started-with-data.table/</link>
-      <pubDate>Tue, 12 Jun 2018 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 15 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/blog/getting-started-with-data.table/</guid>
       <description>data.table outperforms data.frame in atleast 4 different areasThe following are few reasons why one should prefer data.table instead of data.frame
@@ -34,10 +34,10 @@ And trying to answer the question led me to the following:
     
     <item>
       <title>Linear regression - Must knows</title>
-      <link>/blog/linear-regression---must-knows/</link>
+      <link>/blog/linear-regression-must-knows/</link>
       <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/linear-regression---must-knows/</guid>
+      <guid>/blog/linear-regression-must-knows/</guid>
       <description>Linear regression is one of the easiest and first taught models. But there is more to the algorithm than it appears. Given its simplicity, it is often abused. In this article, let’s get some facts straight about the algorithm.
 Must-knows about linear regression:
 Linear regression derives a trend line that best fits the dataThere should be linear relationship between response variable &amp;amp; predictors and predictors shouldn’t be correlatedResiduals (Actual - Fitted) should be normally distributed, have constant variance and shouldn’t be autocorrelated.</description>
@@ -45,10 +45,10 @@ Must-knows about linear regression:
     
     <item>
       <title>Cryptocurrency analysis - What to trade?</title>
-      <link>/blog/cryptocurrency-analysis---what-to-trade/</link>
+      <link>/blog/cryptocurrency-analysis-what-to-trade/</link>
       <pubDate>Sun, 08 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/cryptocurrency-analysis---what-to-trade/</guid>
+      <guid>/blog/cryptocurrency-analysis-what-to-trade/</guid>
       <description>I recently developed a rudimentary method to identify the potential cryptocurrencies to BUY and trade. I did this exercise for Gramener’s blog. Reposting the same below. The actual article that I wrote can be found here
 I followed the below steps:
 Scraped the entire trading history of each of the cryptocurrencies available at CoinMarketCapFiltered cryptocurrencies based on Market capital, moving averages and PricesRan a greedy search to identify the combination of moving averages that yielded maximum profits on cross over points trading strategy.</description>
@@ -81,8 +81,9 @@ Anyone who wishes to master excel should know the following aspects:
       <pubDate>Wed, 04 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
-      <description>Data science is an unique field. You have to be creative, structured and thorough and that is why I love this field. I am Kiran Ganji and currently working as an Analyst at Gramener. I love solving complex problems and I am an aspiring consultant.
-I like statistical programming language R, Technology, International politics and Finance. I graduated from NIT Calicut with majors in Biotechnology. Since my graduation I worked with LatentView Analytics and Gramener</description>
+      <description>Hola! I am Kiran Ganji and currently a Data Scientist at Quantium. I am a passionate data geek and a traveller. I typically dive deep into data to listen to what it has to say and apply the same to the life when I travel.
+Graduated from NIT Calicut with majors in Biotechnology. Post my graduation, I worked with LatentView Analytics, Gramener and Quantium
+I started travelling extensively only from August of 2018 and and explored quite a few places since.</description>
     </item>
     
     <item>
@@ -91,9 +92,9 @@ I like statistical programming language R, Technology, International politics an
       <pubDate>Wed, 04 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>/resume/</guid>
-      <description>Professional Summary Data Scientist with 2.5 years of experience in Predictive Analytics consulting. Conceptualized and delivered actionable models across Finance, Manufacturing and Retail industries. Currently, at Gramener, responsible for end-to-end delivery of advanced analytics projects. Have cross-industry experience on working with clients across geographies and considerable expertise in Statistics &amp;amp; Machine Learning.
-Experience Analyst, Gramener Dec 2016 - Present
-Worked on multiple advanced analytics projects for large clients in different areas - Stock trading, Commodity price forecasting and recommendation engines.</description>
+      <description>Professional Summary Data Scientist with 3+ years experience in Predictive Analytics consulting. Conceptualized and delivered actionable models across Finance, Manufacturing, Retail &amp;amp; Property industries. Currently, at Quantium, responsible for end-to-end delivery of advanced analytics projects. Have cross-industry experience on working with clients across geographies and considerable expertise in Statistics &amp;amp; Machine Learning.
+Experience Analyst, Quantium Aug 2018 - Present
+ Customer Churn prediction - Provided a solution to increasing customer churn of the client&amp;rsquo;s product by predicting the customer churn based on the key indicators.</description>
     </item>
     
     <item>
@@ -102,7 +103,7 @@ Worked on multiple advanced analytics projects for large clients in different ar
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/home/</guid>
-      <description>Hello there! Welcome to my blog. I am Kiran Ganji and I am working as an Analyst at Gramener. I started this blog in April 2018 and regularly update it. I classify all my articles into 5 categories. Getting started, Analytics use cases, Case studies, Analysis and Learning. Please feel free to browse, drop in comments or send in the feedback. Happy to connect anytime :)</description>
+      <description>Hello there! Welcome to my blog. A short intro, I am a data geek who&amp;rsquo;s in love with travelling. So, obviosuly, I just have two categories of articles, one related to data science and the other, my travel diaries. Please feel free to browse through and also leave me a message about anything. You can start below :)</description>
     </item>
     
     <item>

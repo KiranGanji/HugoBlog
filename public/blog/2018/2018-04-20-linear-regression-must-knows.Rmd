@@ -2,7 +2,7 @@
 title: "Linear regression - Must knows"
 author: "Kiran Ganji"
 date: 2018-04-20
-categories: ["Learning"]
+categories: ["Data Science"]
 ---
 
 Linear regression is one of the easiest and first taught models. But there is more to the algorithm than it appears. Given its simplicity, it is often abused. In this article, let's get some facts straight about the algorithm.

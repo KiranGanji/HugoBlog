@@ -2,7 +2,7 @@
 title: "Getting started with Data Science"
 author: "Kiran Ganji"
 date: 2018-04-05
-categories: ["Getting Started"]
+categories: ["Data Science"]
 ---
 
 ## Knowing SQL, R/Python, Excel & Powerpoint will get the data science engine started
